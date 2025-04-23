@@ -1,17 +1,18 @@
 package com.udacity.jdnd.course3.critter.user;
 
-import java.util.List;
+
+import java.util.*;
+
 
 /**
- * Represents the form that customer request and response data takes. Does not map
- * to the database directly.
+ * Represents the form that customer request and response data takes. Does not map to the database directly.
  */
 public class CustomerDTO {
     private long id;
     private String name;
     private String phoneNumber;
     private String notes;
-    private List<Long> petIds;
+    private List<UUID> petIds;
 
     public long getId() {
         return id;
@@ -45,11 +46,11 @@ public class CustomerDTO {
         this.notes = notes;
     }
 
-    public List<Long> getPetIds() {
+    public List<UUID> getPetIds() {
         return petIds;
     }
 
-    public void setPetIds(List<Long> petIds) {
+    public void setPetIds(List<UUID> petIds) {
         this.petIds = petIds;
     }
 }

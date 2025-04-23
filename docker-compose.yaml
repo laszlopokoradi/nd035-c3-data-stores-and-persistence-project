@@ -1,0 +1,16 @@
+services:
+  db:
+    image: mysql:lts
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: juggle-rigid-mousy
+      MYSQL_DATABASE: critterdb
+      MYSQL_USER: critter
+      MYSQL_PASSWORD: critter
+    ports:
+        - "33060:3306"
+    volumes:
+        - critterdb:/var/lib/mysql
+
+volumes:
+  critterdb:
