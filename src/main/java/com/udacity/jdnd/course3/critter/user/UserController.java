@@ -1,10 +1,9 @@
 package com.udacity.jdnd.course3.critter.user;
 
+import java.util.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.DayOfWeek;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Handles web requests related to Users.
@@ -27,7 +26,7 @@ public class UserController {
     }
 
     @GetMapping("/customer/pet/{petId}")
-    public CustomerDTO getOwnerByPet(@PathVariable long petId){
+    public CustomerDTO getOwnerByPet(@PathVariable UUID petId){
         throw new UnsupportedOperationException();
     }
 
@@ -37,12 +36,12 @@ public class UserController {
     }
 
     @PostMapping("/employee/{employeeId}")
-    public EmployeeDTO getEmployee(@PathVariable long employeeId) {
+    public EmployeeDTO getEmployee(@PathVariable UUID employeeId) {
         throw new UnsupportedOperationException();
     }
 
     @PutMapping("/employee/{employeeId}")
-    public void setAvailability(@RequestBody Set<DayOfWeek> daysAvailable, @PathVariable long employeeId) {
+    public void setAvailability(@RequestBody Set<DayOfWeek> daysAvailable, @PathVariable UUID employeeId) {
         throw new UnsupportedOperationException();
     }
 

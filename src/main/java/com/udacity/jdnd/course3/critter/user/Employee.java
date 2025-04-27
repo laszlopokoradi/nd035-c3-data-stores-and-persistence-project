@@ -2,7 +2,6 @@ package com.udacity.jdnd.course3.critter.user;
 
 
 import jakarta.persistence.*;
-import org.apache.catalina.users.*;
 
 import java.time.*;
 import java.util.*;
@@ -10,7 +9,6 @@ import java.util.*;
 
 @Entity
 public class Employee extends User {
-    private String name;
     private Set<EmployeeSkill> skills;
     private Set<DayOfWeek> daysAvailable;
 
@@ -19,5 +17,27 @@ public class Employee extends User {
         return this;
     }
 
+    public Employee setName(String name) {
+        super.setName(name);
+        return this;
+    }
 
+    public Set<EmployeeSkill> getSkills() {
+        return skills;
+    }
+
+    public Employee setSkills(
+            Set<EmployeeSkill> skills) {
+        this.skills = skills;
+        return this;
+    }
+
+    public Set<DayOfWeek> getDaysAvailable() {
+        return daysAvailable;
+    }
+
+    public Employee setDaysAvailable(Set<DayOfWeek> daysAvailable) {
+        this.daysAvailable = daysAvailable;
+        return this;
+    }
 }

@@ -9,6 +9,7 @@ import java.util.*;
 
 @Entity
 @Table(name = "pets")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

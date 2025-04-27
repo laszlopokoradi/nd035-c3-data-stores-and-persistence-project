@@ -3,15 +3,12 @@ package com.udacity.jdnd.course3.critter.user;
 
 import com.udacity.jdnd.course3.critter.pet.*;
 import jakarta.persistence.*;
-import org.hibernate.annotations.*;
-import org.hibernate.type.*;
 
 import java.util.*;
 
 
 @Entity
 public class Customer extends User {
-    protected String name;
     protected String phoneNumber;
     protected String notes;
     protected List<Pet> pets;
@@ -19,6 +16,38 @@ public class Customer extends User {
 
     public Customer setId(UUID id) {
         this.id = id;
+        return this;
+    }
+
+    public Customer setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public Customer setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+        return this;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public Customer setNotes(String notes) {
+        this.notes = notes;
+        return this;
+    }
+
+    public List<Pet> getPets() {
+        return pets;
+    }
+
+    public Customer setPets(List<Pet> pets) {
+        this.pets = pets;
         return this;
     }
 }

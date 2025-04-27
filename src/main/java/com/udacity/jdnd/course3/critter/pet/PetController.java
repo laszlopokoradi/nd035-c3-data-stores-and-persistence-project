@@ -23,7 +23,7 @@ public class PetController {
 
         return PetDTO.fromEntity(savedPet);
 
-        throw new UnsupportedOperationException();
+        // throw new UnsupportedOperationException();
     }
 
     @GetMapping("/{petId}")

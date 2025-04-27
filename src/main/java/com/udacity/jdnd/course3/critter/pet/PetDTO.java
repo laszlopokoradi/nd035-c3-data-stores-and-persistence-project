@@ -1,20 +1,35 @@
 package com.udacity.jdnd.course3.critter.pet;
 
 
+import com.udacity.jdnd.course3.critter.user.*;
 import java.time.*;
 import java.util.*;
 
 
 /**
- * Represents the form that pet request and response data takes. Does not map to the database directly.
+ * Represents the form that pet request and response data takes. Does not map to the database
+ * directly.
  */
 public class PetDTO {
+
     private UUID id;
     private PetType type;
     private String name;
     private UUID ownerId;
     private LocalDate birthDate;
     private String notes;
+
+    public static PetDTO fromEntity(Pet savedPet) {
+        PetDTO petDTO = new PetDTO();
+        petDTO.setId(savedPet.getId())
+               .setType(savedPet.getType())
+               .setName(savedPet.getName())
+               .setOwnerId(savedPet.getOwner().getId())
+               .setBirthDate(savedPet.getBirthDate())
+               .setNotes(savedPet.getNotes());
+
+        return petDTO;
+    }
 
 
     public UUID getId() {
@@ -75,5 +90,16 @@ public class PetDTO {
         return this;
     }
 
-    
+
+    public Pet toEntity() {
+        Pet pet = new Pet();
+        pet.setId(this.id)
+           .setType(this.type)
+           .setName(this.name)
+           .setOwner(new Customer().setId(this.ownerId))
+           .setBirthDate(this.birthDate)
+           .setNotes(this.notes);
+
+        return pet;
+    }
 }

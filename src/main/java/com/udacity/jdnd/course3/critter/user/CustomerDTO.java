@@ -8,17 +8,17 @@ import java.util.*;
  * Represents the form that customer request and response data takes. Does not map to the database directly.
  */
 public class CustomerDTO {
-    private long id;
+    private UUID id;
     private String name;
     private String phoneNumber;
     private String notes;
     private List<UUID> petIds;
 
-    public long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

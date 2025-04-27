@@ -11,17 +11,17 @@ import java.util.*;
  * to the database directly.
  */
 public class ScheduleDTO {
-    private long id;
+    private UUID id;
     private List<UUID> employeeIds;
     private List<UUID> petIds;
     private LocalDate date;
     private Set<EmployeeSkill> activities;
 
-    public long getId(){
+    public UUID getId(){
         return id;
     }
     
-    public void setId(long id){
+    public void setId(UUID id){
         this.id = id;
     }
     
