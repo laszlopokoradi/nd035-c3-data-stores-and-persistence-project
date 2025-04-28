@@ -37,4 +37,11 @@ public class PetService {
         petRepository.deleteById(id);
     }
 
+    protected List<Pet> getPetsByOwner(UUID ownerId) {
+        if (ownerId == null) {
+            throw new IllegalArgumentException("Owner ID cannot be null");
+        }
+
+        return petRepository.findByOwnerId(ownerId);
+    }
 }

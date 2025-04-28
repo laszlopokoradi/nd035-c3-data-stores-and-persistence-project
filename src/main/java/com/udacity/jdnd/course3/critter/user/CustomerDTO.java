@@ -53,4 +53,14 @@ public class CustomerDTO {
     public void setPetIds(List<UUID> petIds) {
         this.petIds = petIds;
     }
+
+    protected Customer toEntity() {
+        Customer customer = new Customer();
+        customer.setId(this.id);
+        customer.setName(this.name);
+        customer.setPhoneNumber(this.phoneNumber);
+        customer.setNotes(this.notes);
+        customer.setPetIds(this.petIds);
+        return customer;
+    }
 }

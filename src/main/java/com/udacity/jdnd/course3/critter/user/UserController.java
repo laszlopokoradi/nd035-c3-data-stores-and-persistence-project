@@ -14,9 +14,17 @@ import java.time.DayOfWeek;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @PostMapping("/customer")
     public CustomerDTO saveCustomer(@RequestBody CustomerDTO customerDTO){
+        Customer customer = customerDTO.toEntity();
+
+        this.userService.create(customerDTO);
         throw new UnsupportedOperationException();
     }
 

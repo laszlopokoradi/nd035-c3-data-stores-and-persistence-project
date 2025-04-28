@@ -7,19 +7,19 @@ import jakarta.persistence.*;
 import java.time.*;
 import java.util.*;
 
+
 @Entity
 @Table(name = "pets")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Pet {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false)
     private PetType type;
 
-    @Column(name ="name", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
     @ManyToOne
@@ -61,6 +61,10 @@ public class Pet {
     }
 
     protected Pet setName(String name) {
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Name cannot be null or empty");
+        }
+
         this.name = name;
         return this;
     }

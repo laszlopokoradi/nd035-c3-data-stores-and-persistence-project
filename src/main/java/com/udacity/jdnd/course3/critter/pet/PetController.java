@@ -28,16 +28,38 @@ public class PetController {
 
     @GetMapping("/{petId}")
     public PetDTO getPet(@PathVariable UUID petId) {
-        throw new UnsupportedOperationException();
+        Pet pet = this.petService.getPetById(petId);
+
+        return PetDTO.fromEntity(pet);
+
+        // throw new UnsupportedOperationException();
     }
 
     @GetMapping
     public List<PetDTO> getPets(){
-        throw new UnsupportedOperationException();
+        List<Pet> pets = this.petService.getAllPets();
+        List<PetDTO> petDTOs = new ArrayList<>();
+
+        for (Pet pet : pets) {
+            petDTOs.add(PetDTO.fromEntity(pet));
+        }
+
+        return petDTOs;
+
+        // throw new UnsupportedOperationException();
     }
 
     @GetMapping("/owner/{ownerId}")
     public List<PetDTO> getPetsByOwner(@PathVariable UUID ownerId) {
-        throw new UnsupportedOperationException();
+        List<Pet> pets = this.petService.getPetsByOwner(ownerId);
+        List<PetDTO> petDTOs = new ArrayList<>();
+
+        for (Pet pet : pets) {
+            petDTOs.add(PetDTO.fromEntity(pet));
+        }
+
+        return petDTOs;
+
+        // throw new UnsupportedOperationException();
     }
 }

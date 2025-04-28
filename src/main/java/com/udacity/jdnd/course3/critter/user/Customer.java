@@ -8,9 +8,13 @@ import java.util.*;
 
 
 @Entity
+@Table(name = "customers")
 public class Customer extends User {
+    @Column
     protected String phoneNumber;
+    @Column
     protected String notes;
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     protected List<Pet> pets;
 
 

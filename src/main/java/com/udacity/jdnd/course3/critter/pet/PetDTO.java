@@ -2,6 +2,8 @@ package com.udacity.jdnd.course3.critter.pet;
 
 
 import com.udacity.jdnd.course3.critter.user.*;
+import jakarta.validation.constraints.*;
+
 import java.time.*;
 import java.util.*;
 
@@ -11,12 +13,21 @@ import java.util.*;
  * directly.
  */
 public class PetDTO {
-
     private UUID id;
+
+    @NotNull(message = "Type cannot be null")
     private PetType type;
+
+    @NotNull(message = "Name cannot be null")
     private String name;
+
+    @NotNull(message = "Owner ID cannot be null")
     private UUID ownerId;
+
+    @PastOrPresent(message = "Birth date cannot be in the future")
     private LocalDate birthDate;
+
+    @Size(max = 255, message = "Notes cannot be longer than 255 characters")
     private String notes;
 
     public static PetDTO fromEntity(Pet savedPet) {
@@ -30,7 +41,6 @@ public class PetDTO {
 
         return petDTO;
     }
-
 
     public UUID getId() {
         return id;
