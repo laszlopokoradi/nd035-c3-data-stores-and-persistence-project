@@ -8,7 +8,7 @@ services:
       MYSQL_USER: critter
       MYSQL_PASSWORD: critter
     ports:
-        - "33060:3306"
+        - "63306:3306"
     volumes:
         - critterdb:/var/lib/mysql
 

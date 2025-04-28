@@ -30,7 +30,7 @@ public class Pet {
     private LocalDate birthDate;
     private String notes;
 
-    protected Pet setId(UUID id) {
+    public Pet setId(UUID id) {
         this.id = id;
         return this;
     }
@@ -39,11 +39,11 @@ public class Pet {
         return id;
     }
 
-    protected LocalDate getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    protected Pet setBirthDate(LocalDate birthDate) {
+    public Pet setBirthDate(LocalDate birthDate) {
         if (birthDate == null) {
             throw new IllegalArgumentException("Birth date cannot be null");
         }
@@ -56,11 +56,11 @@ public class Pet {
         return this;
     }
 
-    protected String getName() {
+    public String getName() {
         return name;
     }
 
-    protected Pet setName(String name) {
+    public Pet setName(String name) {
         if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("Name cannot be null or empty");
         }
@@ -69,29 +69,29 @@ public class Pet {
         return this;
     }
 
-    protected String getNotes() {
+    public String getNotes() {
         return notes;
     }
 
-    protected Pet setNotes(String notes) {
+    public Pet setNotes(String notes) {
         this.notes = notes;
         return this;
     }
 
-    protected Customer getOwner() {
+    public Customer getOwner() {
         return owner;
     }
 
-    protected Pet setOwner(Customer owner) {
+    public Pet setOwner(Customer owner) {
         this.owner = owner;
         return this;
     }
 
-    protected PetType getType() {
+    public PetType getType() {
         return type;
     }
 
-    protected Pet setType(PetType type) {
+    public Pet setType(PetType type) {
         this.type = type;
         return this;
     }
