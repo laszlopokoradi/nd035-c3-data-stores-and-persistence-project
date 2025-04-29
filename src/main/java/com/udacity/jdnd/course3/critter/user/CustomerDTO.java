@@ -15,7 +15,7 @@ public class CustomerDTO {
     private String name;
     private String phoneNumber;
     private String notes;
-    private List<UUID> petIds;
+    private List<UUID> petIds = new ArrayList<>();
 
     public static CustomerDTO fromEntity(Customer createdCustomer) {
         CustomerDTO customerDTO =  new CustomerDTO()

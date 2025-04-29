@@ -15,8 +15,7 @@ public class Customer extends User {
     @Column
     protected String notes;
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
-    protected List<Pet> pets;
-
+    protected List<Pet> pets = new ArrayList<>();
 
     public Customer setId(UUID id) {
         this.id = id;

@@ -22,8 +22,6 @@ public class PetController {
         Pet savedPet = this.petService.savePet(petDTO.toEntity());
 
         return PetDTO.fromEntity(savedPet);
-
-        // throw new UnsupportedOperationException();
     }
 
     @GetMapping("/{petId}")
@@ -31,8 +29,6 @@ public class PetController {
         Pet pet = this.petService.getPetById(petId);
 
         return PetDTO.fromEntity(pet);
-
-        // throw new UnsupportedOperationException();
     }
 
     @GetMapping
@@ -45,8 +41,6 @@ public class PetController {
         }
 
         return petDTOs;
-
-        // throw new UnsupportedOperationException();
     }
 
     @GetMapping("/owner/{ownerId}")
@@ -59,7 +53,5 @@ public class PetController {
         }
 
         return petDTOs;
-
-        // throw new UnsupportedOperationException();
     }
 }

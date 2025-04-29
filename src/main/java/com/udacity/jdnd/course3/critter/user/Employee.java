@@ -8,6 +8,7 @@ import java.util.*;
 
 
 @Entity
+@Table(name = "employees")
 public class Employee extends User {
     private Set<EmployeeSkill> skills;
     private Set<DayOfWeek> daysAvailable;
