@@ -22,10 +22,9 @@ public class UserController {
 
     @PostMapping("/customer")
     public CustomerDTO saveCustomer(@RequestBody CustomerDTO customerDTO){
-        Customer createdCustomer = this.userService.create(customerDTO.toEntity());
+        Customer createdCustomer = this.userService.create(customerDTO);
 
         return CustomerDTO.fromEntity(createdCustomer);
-        //throw new UnsupportedOperationException();
     }
 
     @GetMapping("/customer")

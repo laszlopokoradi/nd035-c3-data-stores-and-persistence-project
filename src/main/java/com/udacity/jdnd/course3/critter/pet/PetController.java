@@ -1,5 +1,6 @@
 package com.udacity.jdnd.course3.critter.pet;
 
+import jakarta.validation.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -18,7 +19,7 @@ public class PetController {
     }
 
     @PostMapping
-    public PetDTO savePet(@RequestBody PetDTO petDTO) {
+    public PetDTO savePet(@RequestBody @Valid PetDTO petDTO) {
         Pet savedPet = this.petService.savePet(petDTO.toEntity());
 
         return PetDTO.fromEntity(savedPet);

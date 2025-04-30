@@ -12,16 +12,20 @@ import java.util.*;
 public class Customer extends User {
     @Column
     protected String phoneNumber;
+
     @Column
     protected String notes;
+
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     protected List<Pet> pets = new ArrayList<>();
 
+    @Override
     public Customer setId(UUID id) {
         this.id = id;
         return this;
     }
 
+    @Override
     public Customer setName(String name) {
         this.name = name;
         return this;
@@ -47,10 +51,5 @@ public class Customer extends User {
 
     public List<Pet> getPets() {
         return pets;
-    }
-
-    public Customer setPets(List<Pet> pets) {
-        this.pets = pets;
-        return this;
     }
 }

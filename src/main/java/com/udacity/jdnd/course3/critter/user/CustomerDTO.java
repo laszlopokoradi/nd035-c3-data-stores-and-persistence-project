@@ -2,6 +2,8 @@ package com.udacity.jdnd.course3.critter.user;
 
 
 import com.udacity.jdnd.course3.critter.pet.*;
+import jakarta.validation.constraints.*;
+
 import java.util.*;
 
 
@@ -10,11 +12,16 @@ import java.util.*;
  * directly.
  */
 public class CustomerDTO {
-
     private UUID id;
+
+    @NotBlank
     private String name;
+
+    @NotBlank
     private String phoneNumber;
+
     private String notes;
+
     private List<UUID> petIds = new ArrayList<>();
 
     public static CustomerDTO fromEntity(Customer createdCustomer) {
@@ -79,19 +86,5 @@ public class CustomerDTO {
         this.petIds = petIds;
 
         return this;
-    }
-
-    protected Customer toEntity() {
-        Customer customer = new Customer();
-        customer.setId(this.id);
-        customer.setName(this.name);
-        customer.setPhoneNumber(this.phoneNumber);
-        customer.setNotes(this.notes);
-
-        for (UUID petId : this.petIds) {
-            customer.getPets().add(new Pet().setId(petId));
-        }
-
-        return customer;
     }
 }

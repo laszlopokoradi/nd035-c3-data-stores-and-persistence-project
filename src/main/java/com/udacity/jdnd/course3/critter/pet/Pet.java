@@ -28,6 +28,8 @@ public class Pet {
 
     @Column(name = "birth_date", nullable = true)
     private LocalDate birthDate;
+
+    @Column(name = "notes", nullable = true)
     private String notes;
 
     public Pet setId(UUID id) {

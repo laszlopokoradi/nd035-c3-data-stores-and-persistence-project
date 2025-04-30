@@ -1,7 +1,6 @@
-package com.udacity.jdnd.course3.critter;
+package com.udacity.jdnd.course3.critter.user;
 
 
-import com.udacity.jdnd.course3.critter.user.*;
 import org.springframework.data.jpa.repository.*;
 
 import java.util.*;
