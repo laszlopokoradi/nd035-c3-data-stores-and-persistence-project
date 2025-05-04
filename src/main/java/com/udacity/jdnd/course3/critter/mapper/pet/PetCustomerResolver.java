@@ -1,4 +1,4 @@
-package com.udacity.jdnd.course3.critter.pet;
+package com.udacity.jdnd.course3.critter.mapper.pet;
 
 
 import com.udacity.jdnd.course3.critter.user.*;
@@ -8,10 +8,10 @@ import org.springframework.stereotype.*;
 import java.util.*;
 
 @Component
-public class CustomerResolver {
+public class PetCustomerResolver {
     private final CustomerRepository customerRepository;
 
-    public CustomerResolver(CustomerRepository customerRepository) {
+    public PetCustomerResolver(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
 

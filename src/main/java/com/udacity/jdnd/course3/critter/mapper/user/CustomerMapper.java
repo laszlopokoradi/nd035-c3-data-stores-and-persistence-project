@@ -1,0 +1,21 @@
+package com.udacity.jdnd.course3.critter.mapper.user;
+
+import com.udacity.jdnd.course3.critter.pet.*;
+import com.udacity.jdnd.course3.critter.user.*;
+import org.mapstruct.*;
+import org.mapstruct.MappingConstants.*;
+
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = ComponentModel.SPRING,
+        uses = {CustomerPetResolver.class})
+public interface CustomerMapper {
+    @Mapping(source = "petIds", target = "pets")
+    @Mapping(target = "id", ignore = true)
+    Customer toEntity(CustomerDTO customerDTO );
+
+    @Mapping(source = "ownerId", target = "owner")
+    @Mapping(target = "id", ignore = true)
+    void updateFromDto(PetDTO dto, @MappingTarget Pet pet);
+
+    @Mapping(source = "pets", target = "petIds")
+    CustomerDTO toDto(Customer customer);
+}
