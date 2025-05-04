@@ -11,11 +11,10 @@ import java.util.*;
 public class UserService {
     private CustomerRepository customerRepository;
     private EmployeeRepository employeeRepository;
-    private CustomerMapper customerMapper;
 
-    public UserService(CustomerRepository customerRepository, CustomerMapper customerPetMapper) {
+    public UserService(CustomerRepository customerRepository, EmployeeRepository employeeRepository) {
         this.customerRepository = customerRepository;
-        this.customerMapper = customerPetMapper;
+        this.employeeRepository = employeeRepository;
     }
 
     public Customer create(Customer customer) {
