@@ -28,4 +28,12 @@ public class UserService {
     public List<Customer> getAllCustomers() {
         return this.customerRepository.findAll();
     }
+
+    protected Optional<Customer> getOwnerByPet(UUID petId) {
+        return this.customerRepository.findByPetId(petId);
+    }
+
+    protected Optional<Employee> getEmployee(UUID employeeId) {
+        return this.employeeRepository.findById(employeeId);
+    }
 }

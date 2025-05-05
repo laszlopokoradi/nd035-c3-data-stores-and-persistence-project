@@ -3,6 +3,8 @@ package com.udacity.jdnd.course3.critter.user;
 import com.udacity.jdnd.course3.critter.mapper.user.*;
 import java.time.*;
 import java.util.*;
+
+import jakarta.persistence.*;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -18,10 +20,12 @@ public class UserController {
 
     private final UserService userService;
     private final CustomerMapper customerMapper;
+    private final EmployeeMapper employeeMapper;
 
-    public UserController(UserService userService, CustomerMapper customerMapper) {
+    public UserController(UserService userService, CustomerMapper customerMapper, EmployeeMapper employeeMapper) {
         this.userService = userService;
         this.customerMapper = customerMapper;
+        this.employeeMapper = employeeMapper;
     }
 
     @PostMapping("/customer")
@@ -45,19 +49,29 @@ public class UserController {
 
     @GetMapping("/customer/pet/{petId}")
     public CustomerDTO getOwnerByPet(@PathVariable UUID petId) {
-        throw new UnsupportedOperationException();
+        Optional<Customer> customer = this.userService.getOwnerByPet(petId);
+
+        return customer
+                .map(CustomerDTO::fromEntity)
+                .orElseThrow(() -> new EntityNotFoundException("No owner of pet (id: %s) found".formatted(petId)));
     }
 
     @PostMapping("/employee")
     public EmployeeDTO saveEmployee(@RequestBody EmployeeDTO employeeDTO) {
-        Employee createdEmployee = this.userService.create(employeeDTO);
+        Employee employee = this.employeeMapper.toEntity(employeeDTO);
 
-        return EmployeeDTO.fromEntity(createdEmployee);
+        Employee createdEmployee = this.userService.create(employee);
+
+        return employeeMapper.toDto(createdEmployee);
     }
 
-    @PostMapping("/employee/{employeeId}")
+    @GetMapping("/employee/{employeeId}")
     public EmployeeDTO getEmployee(@PathVariable UUID employeeId) {
-        throw new UnsupportedOperationException();
+        Optional<Employee> employee = this.userService.getEmployee(employeeId);
+
+        return employee
+                .map(employeeMapper::toDto)
+                .orElseThrow(() -> new EntityNotFoundException("No employee (id: %s) found".formatted(employeeId)));
     }
 
     @PutMapping("/employee/{employeeId}")

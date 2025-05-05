@@ -13,11 +13,13 @@ public class Employee extends User {
     private Set<EmployeeSkill> skills;
     private Set<DayOfWeek> daysAvailable;
 
+    @Override
     public Employee setId(UUID id) {
         super.setId(id);
         return this;
     }
 
+    @Override
     public Employee setName(String name) {
         super.setName(name);
         return this;
