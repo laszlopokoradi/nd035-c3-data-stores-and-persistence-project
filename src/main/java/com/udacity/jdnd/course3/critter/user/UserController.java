@@ -1,6 +1,7 @@
 package com.udacity.jdnd.course3.critter.user;
 
-import com.udacity.jdnd.course3.critter.mapper.user.*;
+import com.udacity.jdnd.course3.critter.mapper.*;
+
 import java.time.*;
 import java.util.*;
 
@@ -77,7 +78,15 @@ public class UserController {
     @PutMapping("/employee/{employeeId}")
     public void setAvailability(@RequestBody Set<DayOfWeek> daysAvailable,
             @PathVariable UUID employeeId) {
-        throw new UnsupportedOperationException();
+        Optional<Employee> employee = this.userService.getEmployee(employeeId);
+
+        if (employee.isPresent()) {
+            Employee e = employee.get();
+            e.setDaysAvailable(daysAvailable);
+            this.userService.update(e);
+        } else {
+            throw new EntityNotFoundException("No employee (id: %s) found".formatted(employeeId));
+        }
     }
 
     @GetMapping("/employee/availability")

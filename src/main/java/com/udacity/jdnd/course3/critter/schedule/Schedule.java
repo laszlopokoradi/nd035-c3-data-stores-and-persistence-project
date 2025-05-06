@@ -27,7 +27,7 @@ public class Schedule {
     @JoinTable(name = "schedule_pets",
             joinColumns = @JoinColumn(name = "schedule_id"),
             inverseJoinColumns = @JoinColumn(name = "pet_id"))
-    private Set<Pet> petIds = new LinkedHashSet<>();
+    private List<Pet> pets = new ArrayList<>();
 
     @Column(name = "date")
     private LocalDate date;
@@ -40,12 +40,12 @@ public class Schedule {
         this.date = date;
     }
 
-    public Set<Pet> getPetIds() {
-        return petIds;
+    public List<Pet> getPets() {
+        return pets;
     }
 
-    public void setPetIds(Set<Pet> petIds) {
-        this.petIds = petIds;
+    public void setPets(List<Pet> pets) {
+        this.pets = pets;
     }
 
     public List<Employee> getEmployeeIds() {

@@ -1,7 +1,6 @@
 package com.udacity.jdnd.course3.critter.user;
 
 
-import com.udacity.jdnd.course3.critter.mapper.user.*;
 import org.springframework.stereotype.*;
 
 import java.util.*;
@@ -29,11 +28,15 @@ public class UserService {
         return this.customerRepository.findAll();
     }
 
-    protected Optional<Customer> getOwnerByPet(UUID petId) {
+    public Optional<Customer> getOwnerByPet(UUID petId) {
         return this.customerRepository.findByPetId(petId);
     }
 
-    protected Optional<Employee> getEmployee(UUID employeeId) {
+    public Optional<Employee> getEmployee(UUID employeeId) {
         return this.employeeRepository.findById(employeeId);
+    }
+
+    public void update(Employee e) {
+        this.employeeRepository.save(e);
     }
 }

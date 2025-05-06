@@ -1,4 +1,4 @@
-package com.udacity.jdnd.course3.critter.mapper.pet;
+package com.udacity.jdnd.course3.critter.mapper;
 
 
 import com.udacity.jdnd.course3.critter.user.*;
@@ -8,10 +8,10 @@ import org.springframework.stereotype.*;
 import java.util.*;
 
 @Component
-public class PetCustomerResolver {
+public class CustomerResolver {
     private final CustomerRepository customerRepository;
 
-    public PetCustomerResolver(CustomerRepository customerRepository) {
+    public CustomerResolver(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
 
@@ -22,5 +22,12 @@ public class PetCustomerResolver {
         return customerRepository.findById(ownerId)
                                  .orElseThrow(() -> new EntityNotFoundException(
                                          "Customer not found with id: " + ownerId));
+    }
+
+    public UUID map(Customer customer) {
+        if (customer == null) {
+            return null;
+        }
+        return customer.getId();
     }
 }

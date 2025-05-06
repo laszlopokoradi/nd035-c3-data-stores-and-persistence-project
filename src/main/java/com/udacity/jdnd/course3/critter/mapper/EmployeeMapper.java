@@ -1,4 +1,4 @@
-package com.udacity.jdnd.course3.critter.mapper.user;
+package com.udacity.jdnd.course3.critter.mapper;
 
 
 import com.udacity.jdnd.course3.critter.user.*;

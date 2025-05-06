@@ -10,7 +10,15 @@ import java.util.*;
 @Entity
 @Table(name = "employees")
 public class Employee extends User {
+
+    @ElementCollection(targetClass = EmployeeSkill.class)
+    @CollectionTable(name = "employee_skills", joinColumns = @JoinColumn(name = "employee_id"))
+    @Enumerated(EnumType.STRING)
     private Set<EmployeeSkill> skills;
+
+    @ElementCollection(targetClass = DayOfWeek.class)
+    @CollectionTable(name = "employee_days_available", joinColumns = @JoinColumn(name = "employee_id"))
+    @Enumerated(EnumType.ORDINAL)
     private Set<DayOfWeek> daysAvailable;
 
     @Override

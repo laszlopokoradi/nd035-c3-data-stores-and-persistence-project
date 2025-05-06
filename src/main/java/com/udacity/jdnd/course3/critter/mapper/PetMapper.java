@@ -1,9 +1,9 @@
-package com.udacity.jdnd.course3.critter.mapper.pet;
+package com.udacity.jdnd.course3.critter.mapper;
 
 import com.udacity.jdnd.course3.critter.pet.*;
 import org.mapstruct.*;
 
-@Mapper(componentModel = "spring", uses = {PetCustomerResolver.class})
+@Mapper(componentModel = "spring", uses = {CustomerResolver.class})
 public interface PetMapper {
     @Mapping(source = "ownerId", target = "owner")
     @Mapping(target = "id", ignore = true)

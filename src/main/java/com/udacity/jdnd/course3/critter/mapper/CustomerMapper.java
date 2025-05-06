@@ -1,4 +1,4 @@
-package com.udacity.jdnd.course3.critter.mapper.user;
+package com.udacity.jdnd.course3.critter.mapper;
 
 import com.udacity.jdnd.course3.critter.pet.*;
 import com.udacity.jdnd.course3.critter.user.*;
@@ -6,7 +6,7 @@ import org.mapstruct.*;
 import org.mapstruct.MappingConstants.*;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = ComponentModel.SPRING,
-        uses = {CustomerPetResolver.class})
+        uses = {PetResolver.class, CustomerResolver.class})
 public interface CustomerMapper {
     @Mapping(source = "petIds", target = "pets")
     @Mapping(target = "id", ignore = true)

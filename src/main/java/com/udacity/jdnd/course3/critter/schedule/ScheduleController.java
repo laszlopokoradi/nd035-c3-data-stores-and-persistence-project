@@ -1,7 +1,11 @@
 package com.udacity.jdnd.course3.critter.schedule;
 
-import java.util.*;
+
+import com.udacity.jdnd.course3.critter.mapper.*;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.*;
+
 
 /**
  * Handles web requests related to Schedules.
@@ -9,29 +13,54 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/schedule")
 public class ScheduleController {
+    private final ScheduleService scheduleService;
+    private final ScheduleMapper scheduleMapper;
+
+    public ScheduleController(ScheduleService scheduleService, ScheduleMapper scheduleMapper) {
+        this.scheduleService = scheduleService;
+        this.scheduleMapper = scheduleMapper;
+    }
 
     @PostMapping
     public ScheduleDTO createSchedule(@RequestBody ScheduleDTO scheduleDTO) {
-        throw new UnsupportedOperationException();
+        Schedule createdSchedule = this.scheduleService.createSchedule(scheduleMapper.toEntity(scheduleDTO));
+
+        return scheduleMapper.toDto(createdSchedule);
     }
 
     @GetMapping
     public List<ScheduleDTO> getAllSchedules() {
-        throw new UnsupportedOperationException();
+        List<Schedule> schedules = this.scheduleService.getAllSchedules();
+
+        return schedules.stream()
+                        .map(scheduleMapper::toDto)
+                        .toList();
     }
 
     @GetMapping("/pet/{petId}")
     public List<ScheduleDTO> getScheduleForPet(@PathVariable UUID petId) {
-        throw new UnsupportedOperationException();
+        List<Schedule> schedules = this.scheduleService.getSchedulesForPet(petId);
+
+        return schedules.stream()
+                        .map(scheduleMapper::toDto)
+                        .toList();
     }
 
     @GetMapping("/employee/{employeeId}")
     public List<ScheduleDTO> getScheduleForEmployee(@PathVariable UUID employeeId) {
-        throw new UnsupportedOperationException();
+        List<Schedule> schedules = this.scheduleService.getSchedulesForEmployee(employeeId);
+
+        return schedules.stream()
+                        .map(scheduleMapper::toDto)
+                        .toList();
     }
 
     @GetMapping("/customer/{customerId}")
     public List<ScheduleDTO> getScheduleForCustomer(@PathVariable UUID customerId) {
-        throw new UnsupportedOperationException();
+        List<Schedule> schedules = this.scheduleService.getSchedulesForCustomer(customerId);
+
+        return schedules.stream()
+                        .map(scheduleMapper::toDto)
+                        .toList();
     }
 }
