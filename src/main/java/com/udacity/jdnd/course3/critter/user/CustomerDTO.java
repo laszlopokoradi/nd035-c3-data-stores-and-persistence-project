@@ -24,20 +24,6 @@ public class CustomerDTO {
 
     private List<UUID> petIds = new ArrayList<>();
 
-    public static CustomerDTO fromEntity(Customer createdCustomer) {
-        CustomerDTO customerDTO =  new CustomerDTO()
-                .setId(createdCustomer.getId())
-                .setName(createdCustomer.getName())
-                .setPhoneNumber(createdCustomer.getPhoneNumber())
-                .setNotes(createdCustomer.getNotes());
-
-        for (Pet pet : createdCustomer.getPets()) {
-            customerDTO.getPetIds().add(pet.getId());
-        }
-
-        return customerDTO;
-    }
-
     public UUID getId() {
         return id;
     }

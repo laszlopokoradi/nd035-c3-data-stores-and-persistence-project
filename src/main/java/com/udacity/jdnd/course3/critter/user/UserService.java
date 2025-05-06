@@ -1,6 +1,5 @@
 package com.udacity.jdnd.course3.critter.user;
 
-
 import org.springframework.stereotype.*;
 
 import java.util.*;
@@ -8,10 +7,11 @@ import java.util.*;
 
 @Service
 public class UserService {
-    private CustomerRepository customerRepository;
-    private EmployeeRepository employeeRepository;
+    private final CustomerRepository customerRepository;
+    private final EmployeeRepository employeeRepository;
 
-    public UserService(CustomerRepository customerRepository, EmployeeRepository employeeRepository) {
+    public UserService(CustomerRepository customerRepository,
+            EmployeeRepository employeeRepository) {
         this.customerRepository = customerRepository;
         this.employeeRepository = employeeRepository;
     }
@@ -32,7 +32,7 @@ public class UserService {
         return this.customerRepository.findByPetId(petId);
     }
 
-    public Optional<Employee> getEmployee(UUID employeeId) {
+    protected Optional<Employee> getEmployee(UUID employeeId) {
         return this.employeeRepository.findById(employeeId);
     }
 

@@ -1,9 +1,7 @@
 package com.udacity.jdnd.course3.critter.pet;
 
 
-import com.udacity.jdnd.course3.critter.user.*;
 import jakarta.validation.constraints.*;
-
 import java.time.*;
 import java.util.*;
 
@@ -13,6 +11,7 @@ import java.util.*;
  * directly.
  */
 public class PetDTO {
+
     private UUID id;
 
     @NotNull(message = "Type cannot be null")
@@ -29,18 +28,6 @@ public class PetDTO {
 
     @Size(max = 255, message = "Notes cannot be longer than 255 characters")
     private String notes;
-
-    public static PetDTO fromEntity(Pet savedPet) {
-        PetDTO petDTO = new PetDTO();
-        petDTO.setId(savedPet.getId())
-               .setType(savedPet.getType())
-               .setName(savedPet.getName())
-               .setOwnerId(savedPet.getOwner().getId())
-               .setBirthDate(savedPet.getBirthDate())
-               .setNotes(savedPet.getNotes());
-
-        return petDTO;
-    }
 
     public UUID getId() {
         return id;
@@ -98,18 +85,5 @@ public class PetDTO {
     public PetDTO setNotes(String notes) {
         this.notes = notes;
         return this;
-    }
-
-
-    public Pet toEntity() {
-        Pet pet = new Pet();
-        pet.setId(this.id)
-           .setType(this.type)
-           .setName(this.name)
-           .setOwner(new Customer().setId(this.ownerId))
-           .setBirthDate(this.birthDate)
-           .setNotes(this.notes);
-
-        return pet;
     }
 }

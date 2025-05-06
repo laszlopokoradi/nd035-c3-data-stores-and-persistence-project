@@ -37,7 +37,7 @@ public class UserController {
 
         Customer createdCustomer = this.userService.create(customerMapper.toEntity(customerDTO));
 
-        return CustomerDTO.fromEntity(createdCustomer);
+        return this.customerMapper.toDto(createdCustomer);
     }
 
     @GetMapping("/customer")
@@ -53,7 +53,7 @@ public class UserController {
         Optional<Customer> customer = this.userService.getOwnerByPet(petId);
 
         return customer
-                .map(CustomerDTO::fromEntity)
+                .map(customerMapper::toDto)
                 .orElseThrow(() -> new EntityNotFoundException("No owner of pet (id: %s) found".formatted(petId)));
     }
 

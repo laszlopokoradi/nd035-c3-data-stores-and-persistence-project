@@ -1,5 +1,6 @@
 package com.udacity.jdnd.course3.critter.pet;
 
+import com.udacity.jdnd.course3.critter.mapper.*;
 import jakarta.validation.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,23 +14,25 @@ import java.util.*;
 @RequestMapping("/pets")
 public class PetController {
     private final PetService petService;
+    private final PetMapper petMapper;
 
-    public PetController(PetService petService) {
+    public PetController(PetService petService, PetMapper petMapper) {
         this.petService = petService;
+        this.petMapper = petMapper;
     }
 
     @PostMapping
     public PetDTO savePet(@RequestBody @Valid PetDTO petDTO) {
-        Pet savedPet = this.petService.savePet(petDTO.toEntity());
+        Pet savedPet = this.petService.savePet(this.petMapper.toEntity(petDTO));
 
-        return PetDTO.fromEntity(savedPet);
+        return this.petMapper.toDto(savedPet);
     }
 
     @GetMapping("/{petId}")
     public PetDTO getPet(@PathVariable UUID petId) {
         Pet pet = this.petService.getPetById(petId);
 
-        return PetDTO.fromEntity(pet);
+        return this.petMapper.toDto(pet);
     }
 
     @GetMapping
@@ -38,7 +41,7 @@ public class PetController {
         List<PetDTO> petDTOs = new ArrayList<>();
 
         for (Pet pet : pets) {
-            petDTOs.add(PetDTO.fromEntity(pet));
+            petDTOs.add(this.petMapper.toDto(pet));
         }
 
         return petDTOs;
@@ -50,7 +53,7 @@ public class PetController {
         List<PetDTO> petDTOs = new ArrayList<>();
 
         for (Pet pet : pets) {
-            petDTOs.add(PetDTO.fromEntity(pet));
+            petDTOs.add(this.petMapper.toDto(pet));
         }
 
         return petDTOs;
