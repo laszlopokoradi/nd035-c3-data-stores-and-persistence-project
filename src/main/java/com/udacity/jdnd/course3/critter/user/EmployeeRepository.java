@@ -3,9 +3,13 @@ package com.udacity.jdnd.course3.critter.user;
 
 import org.springframework.data.jpa.repository.*;
 
+import java.time.*;
 import java.util.*;
 
 
 public interface EmployeeRepository
         extends JpaRepository<Employee, UUID> {
+
+    @Query("SELECT e FROM Employee e JOIN e.daysAvailable d JOIN e.skills s WHERE d = :dayOfWeek AND s IN :skills")
+    List<Employee> findAllByDaysAvailableAndSkills(DayOfWeek dayOfWeek, Set<EmployeeSkill> skills);
 }

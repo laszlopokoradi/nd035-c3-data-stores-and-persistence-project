@@ -11,7 +11,7 @@ public interface ScheduleRepository
     @Query("SELECT s FROM Schedule s JOIN Pet p WHERE p.id = :petId")
     List<Schedule> findAllByPetId(UUID petId);
 
-    @Query("SELECT s FROM Schedule s JOIN Employee e WHERE e.id = :employeeId")
+    @Query("SELECT s FROM Schedule s JOIN s.employeeIds e WHERE e.id = :employeeId")
     List<Schedule> findAllByEmployeeId(UUID employeeId);
 
     @Query("SELECT s FROM Schedule s JOIN Pet p  WHERE p.owner.id = :customerId")

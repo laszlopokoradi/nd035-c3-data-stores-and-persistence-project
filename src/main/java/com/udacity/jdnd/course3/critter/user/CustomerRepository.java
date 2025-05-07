@@ -9,6 +9,6 @@ import java.util.*;
 @Repository
 public interface CustomerRepository
         extends JpaRepository<Customer, UUID> {
-    @Query("SELECT c FROM Customer c JOIN c.pets p WHERE p.id = :petId")
+    @Query("SELECT c FROM Customer c JOIN FETCH c.pets p WHERE p.id = :petId")
     Optional<Customer> findByPetId(UUID petId);
 }

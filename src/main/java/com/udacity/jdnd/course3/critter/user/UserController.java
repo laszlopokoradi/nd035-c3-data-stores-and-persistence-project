@@ -83,15 +83,18 @@ public class UserController {
         if (employee.isPresent()) {
             Employee e = employee.get();
             e.setDaysAvailable(daysAvailable);
-            this.userService.update(e);
         } else {
             throw new EntityNotFoundException("No employee (id: %s) found".formatted(employeeId));
         }
     }
 
     @GetMapping("/employee/availability")
-    public List<EmployeeDTO> findEmployeesForService(@RequestBody EmployeeRequestDTO employeeDTO) {
-        throw new UnsupportedOperationException();
+    public List<EmployeeDTO> findEmployeesForService(@RequestBody EmployeeRequestDTO requestDTO) {
+        List<Employee> employees = this.userService.findAvailableEmployees(requestDTO.getDate(), requestDTO.getSkills());
+
+        return employees.stream()
+                .map(employeeMapper::toDto)
+                .toList();
     }
 
 }

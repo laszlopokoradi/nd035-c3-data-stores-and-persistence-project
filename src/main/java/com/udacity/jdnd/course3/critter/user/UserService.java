@@ -2,6 +2,7 @@ package com.udacity.jdnd.course3.critter.user;
 
 import org.springframework.stereotype.*;
 
+import java.time.*;
 import java.util.*;
 
 
@@ -32,11 +33,11 @@ public class UserService {
         return this.customerRepository.findByPetId(petId);
     }
 
-    protected Optional<Employee> getEmployee(UUID employeeId) {
+    public Optional<Employee> getEmployee(UUID employeeId) {
         return this.employeeRepository.findById(employeeId);
     }
 
-    public void update(Employee e) {
-        this.employeeRepository.save(e);
+    public List<Employee> findAvailableEmployees(LocalDate date, Set<EmployeeSkill> skills) {
+        return this.employeeRepository.findAllByDaysAvailableAndSkills(date.getDayOfWeek(), skills);
     }
 }
