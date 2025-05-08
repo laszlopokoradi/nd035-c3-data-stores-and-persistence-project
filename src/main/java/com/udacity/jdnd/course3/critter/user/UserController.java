@@ -31,10 +31,6 @@ public class UserController {
 
     @PostMapping("/customer")
     public CustomerDTO saveCustomer(@RequestBody CustomerDTO customerDTO) {
-        if (customerDTO.getPetIds() == null) {
-            customerDTO.setPetIds(new ArrayList<>());
-        }
-
         Customer createdCustomer = this.userService.create(customerMapper.toEntity(customerDTO));
 
         return this.customerMapper.toDto(createdCustomer);

@@ -21,13 +21,18 @@ public class Schedule {
     @JoinTable(name = "schedule_employees",
             joinColumns = @JoinColumn(name = "schedule_id"),
             inverseJoinColumns = @JoinColumn(name = "employee_id"))
-    private List<Employee> employeeIds = new ArrayList<>();
+    private List<Employee> employees = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(name = "schedule_pets",
             joinColumns = @JoinColumn(name = "schedule_id"),
             inverseJoinColumns = @JoinColumn(name = "pet_id"))
     private List<Pet> pets = new ArrayList<>();
+
+    @ElementCollection(targetClass = EmployeeSkill.class)
+    @CollectionTable(name = "schedule_activities", joinColumns = @JoinColumn(name = "schedule_id"))
+    @Enumerated(EnumType.STRING)
+    private Set<EmployeeSkill> activities;
 
     @Column(name = "date")
     private LocalDate date;
@@ -48,12 +53,12 @@ public class Schedule {
         this.pets = pets;
     }
 
-    public List<Employee> getEmployeeIds() {
-        return employeeIds;
+    public List<Employee> getEmployees() {
+        return employees;
     }
 
-    public void setEmployeeIds(List<Employee> employeeIds) {
-        this.employeeIds = employeeIds;
+    public void setEmployees(List<Employee> employeeIds) {
+        this.employees = employeeIds;
     }
 
     public Long getId() {
@@ -64,5 +69,13 @@ public class Schedule {
         this.id = id;
 
         return this;
+    }
+
+    public Set<EmployeeSkill> getActivities() {
+        return activities;
+    }
+
+    public void setActivities(Set<EmployeeSkill> activities) {
+        this.activities = activities;
     }
 }

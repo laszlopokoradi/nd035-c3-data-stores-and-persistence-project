@@ -16,7 +16,8 @@ public class Customer extends User {
     @Column
     protected String notes;
 
-    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER, targetEntity = Pet.class)
+    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY, targetEntity = Pet.class,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     protected List<Pet> pets = new ArrayList<>();
 
     @Override
@@ -56,5 +57,13 @@ public class Customer extends User {
     public Customer setPets(List<Pet> pets) {
         this.pets = pets;
         return this;
+    }
+
+    public void addPet(Pet pet) {
+        if (pet == null) {
+            throw new IllegalArgumentException("Pet cannot be null");
+        }
+
+        pets.add(pet);
     }
 }

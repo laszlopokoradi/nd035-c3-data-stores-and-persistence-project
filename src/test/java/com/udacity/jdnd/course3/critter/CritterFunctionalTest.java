@@ -162,7 +162,7 @@ class CritterFunctionalTest {
                                         .map(EmployeeDTO::getId)
                                         .collect(Collectors.toSet());
         Set<UUID> eIds1expected = Set.of(emp1n.getId(), emp2n.getId());
-        Assertions.assertEquals(eIds1, eIds1expected);
+        Assertions.assertEquals(eIds1expected, eIds1);
 
         //make a request that matches only employee 3
         EmployeeRequestDTO er2 = new EmployeeRequestDTO();
@@ -194,8 +194,7 @@ class CritterFunctionalTest {
         Set<EmployeeSkill> skillSet = Set.of(EmployeeSkill.PETTING);
 
         scheduleController.createSchedule(createScheduleDTO(petList, employeeList, date, skillSet));
-        ScheduleDTO scheduleDTO = scheduleController.getAllSchedules()
-                                                    .get(0);
+        ScheduleDTO scheduleDTO = scheduleController.getAllSchedules().getFirst();
 
         Assertions.assertEquals(skillSet, scheduleDTO.getActivities());
         Assertions.assertEquals(scheduleDTO.getDate(), date);

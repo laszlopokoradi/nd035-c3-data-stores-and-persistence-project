@@ -85,7 +85,13 @@ public class Pet {
     }
 
     public Pet setOwner(Customer owner) {
+        if (owner == null) {
+            throw new IllegalArgumentException("Owner cannot be null");
+        }
+
         this.owner = owner;
+        owner.addPet(this);
+
         return this;
     }
 

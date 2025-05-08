@@ -8,10 +8,14 @@ import org.mapstruct.*;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING
 , uses = {PetResolver.class, CustomerResolver.class, EmployeeResolver.class})
 public interface ScheduleMapper {
-    @Mapping(target = "id", source = "id")
+    @Mapping(target = "employees", source = "employeeIds")
+    @Mapping(target = "pets", source = "petIds")
+    @Mapping(target = "activities", source = "activities")
     Schedule toEntity(ScheduleDTO scheduleDTO);
     
     @Mapping(target = "petIds", source = "pets")
+    @Mapping(target = "employeeIds", source = "employees")
+    @Mapping(target = "activities", source = "activities")
     ScheduleDTO toDto(Schedule schedule);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

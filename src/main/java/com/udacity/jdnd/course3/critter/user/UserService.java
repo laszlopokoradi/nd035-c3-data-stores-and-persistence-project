@@ -4,6 +4,7 @@ import org.springframework.stereotype.*;
 
 import java.time.*;
 import java.util.*;
+import java.util.stream.*;
 
 
 @Service
@@ -38,6 +39,11 @@ public class UserService {
     }
 
     public List<Employee> findAvailableEmployees(LocalDate date, Set<EmployeeSkill> skills) {
-        return this.employeeRepository.findAllByDaysAvailableAndSkills(date.getDayOfWeek(), skills);
+        List<Employee> employees = this.employeeRepository.findAll();
+
+        return employees.stream()
+                        .filter(employee -> employee.getDaysAvailable().contains(date.getDayOfWeek()))
+                        .filter(employee -> employee.getSkills().containsAll(skills))
+                        .toList();
     }
 }

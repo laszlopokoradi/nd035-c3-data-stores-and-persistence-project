@@ -11,7 +11,7 @@ import java.util.stream.*;
 @Component
 public class ScheduleResolver {
 
-    Set<Pet> map(List<UUID> petIds) {
+    Set<Pet> resolvePetIds(List<UUID> petIds) {
         if (petIds == null) {
             return null;
         }
@@ -23,5 +23,13 @@ public class ScheduleResolver {
                     return pet;
                 }
         ).collect(Collectors.toSet());
+    }
+
+    List<UUID> resolvePets(Set<Pet> pets) {
+        if (pets == null) {
+            return null;
+        }
+
+        return pets.stream().map(Pet::getId).toList();
     }
 }
