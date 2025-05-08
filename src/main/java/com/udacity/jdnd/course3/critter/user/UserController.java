@@ -6,6 +6,7 @@ import java.time.*;
 import java.util.*;
 
 import jakarta.persistence.*;
+import jakarta.validation.*;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -54,7 +55,7 @@ public class UserController {
     }
 
     @PostMapping("/employee")
-    public EmployeeDTO saveEmployee(@RequestBody EmployeeDTO employeeDTO) {
+    public EmployeeDTO saveEmployee(@Valid @RequestBody EmployeeDTO employeeDTO) {
         Employee employee = this.employeeMapper.toEntity(employeeDTO);
 
         Employee createdEmployee = this.userService.create(employee);

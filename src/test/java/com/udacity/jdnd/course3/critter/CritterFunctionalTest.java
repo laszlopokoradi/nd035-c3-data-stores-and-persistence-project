@@ -325,4 +325,14 @@ class CritterFunctionalTest {
         Assertions.assertEquals(sched1.getDate(), sched2.getDate());
     }
 
+    @Test
+    void testCreateEmployeeWithoutName() {
+        EmployeeDTO employeeDTO = new EmployeeDTO();
+        employeeDTO.setSkills(Set.of(EmployeeSkill.FEEDING, EmployeeSkill.PETTING));
+
+        Throwable thrown = catchThrowable(() -> {
+            EmployeeDTO e = userController.saveEmployee(employeeDTO);
+        });
+        assertThat(thrown).hasMessageContaining("Wrong");
+    }
 }
