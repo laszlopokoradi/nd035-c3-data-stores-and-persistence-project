@@ -1,10 +1,11 @@
-package com.udacity.jdnd.course3.critter.user;
+package com.udacity.jdnd.course3.critter.service;
 
+import com.udacity.jdnd.course3.critter.entity.*;
+import com.udacity.jdnd.course3.critter.repository.*;
 import org.springframework.stereotype.*;
 
 import java.time.*;
 import java.util.*;
-import java.util.stream.*;
 
 
 @Service

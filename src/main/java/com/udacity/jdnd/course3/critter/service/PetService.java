@@ -1,6 +1,8 @@
-package com.udacity.jdnd.course3.critter.pet;
+package com.udacity.jdnd.course3.critter.service;
 
 
+import com.udacity.jdnd.course3.critter.entity.*;
+import com.udacity.jdnd.course3.critter.repository.*;
 import org.springframework.stereotype.*;
 import java.util.*;
 
@@ -17,8 +19,8 @@ public class PetService {
         return petRepository.save(pet);
     }
 
-    public Pet getPetById(UUID id) {
-        return petRepository.findById(id).orElse(null);
+    public Optional<Pet> getPetById(UUID id) {
+        return this.petRepository.findById(id);
     }
 
     public List<Pet> getAllPets() {
@@ -37,7 +39,7 @@ public class PetService {
         petRepository.deleteById(id);
     }
 
-    protected List<Pet> getPetsByOwner(UUID ownerId) {
+    public List<Pet> getPetsByOwner(UUID ownerId) {
         if (ownerId == null) {
             throw new IllegalArgumentException("Owner ID cannot be null");
         }

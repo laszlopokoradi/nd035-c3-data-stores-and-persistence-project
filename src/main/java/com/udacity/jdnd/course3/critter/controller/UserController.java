@@ -1,10 +1,13 @@
-package com.udacity.jdnd.course3.critter.user;
+package com.udacity.jdnd.course3.critter.controller;
 
+import com.udacity.jdnd.course3.critter.dto.*;
+import com.udacity.jdnd.course3.critter.entity.*;
 import com.udacity.jdnd.course3.critter.mapper.*;
 
 import java.time.*;
 import java.util.*;
 
+import com.udacity.jdnd.course3.critter.service.*;
 import jakarta.persistence.*;
 import jakarta.validation.*;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +34,7 @@ public class UserController {
     }
 
     @PostMapping("/customer")
-    public CustomerDTO saveCustomer(@RequestBody CustomerDTO customerDTO) {
+    public CustomerDTO saveCustomer(@Valid @RequestBody CustomerDTO customerDTO) {
         Customer createdCustomer = this.userService.create(customerMapper.toEntity(customerDTO));
 
         return this.customerMapper.toDto(createdCustomer);

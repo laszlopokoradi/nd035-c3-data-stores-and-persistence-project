@@ -1,7 +1,6 @@
-package com.udacity.jdnd.course3.critter.user;
+package com.udacity.jdnd.course3.critter.entity;
 
 
-import com.udacity.jdnd.course3.critter.pet.*;
 import jakarta.persistence.*;
 
 import java.util.*;

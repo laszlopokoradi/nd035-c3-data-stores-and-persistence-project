@@ -1,8 +1,6 @@
-package com.udacity.jdnd.course3.critter.schedule;
+package com.udacity.jdnd.course3.critter.entity;
 
 
-import com.udacity.jdnd.course3.critter.pet.*;
-import com.udacity.jdnd.course3.critter.user.*;
 import jakarta.persistence.*;
 
 import java.time.*;

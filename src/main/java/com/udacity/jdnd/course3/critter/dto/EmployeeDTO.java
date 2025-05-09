@@ -1,5 +1,6 @@
-package com.udacity.jdnd.course3.critter.user;
+package com.udacity.jdnd.course3.critter.dto;
 
+import com.udacity.jdnd.course3.critter.entity.*;
 import jakarta.validation.constraints.*;
 
 import java.time.DayOfWeek;
@@ -13,13 +14,13 @@ import java.util.*;
 public class EmployeeDTO {
     private UUID id;
 
-    @NotBlank(message = "Name is required.")
+    @NotBlank(message = "Name is required")
     private String name;
 
-    @NotEmpty(message = "Employee must have at least one skill.")
+    @NotEmpty(message = "Employee must have at least one skill")
     private Set<EmployeeSkill> skills;
 
-    @NotEmpty(message = "Employee must have at least one day available.")
+    @NotEmpty(message = "Employee must have at least one day available")
     private Set<DayOfWeek> daysAvailable;
 
     public UUID getId() {
