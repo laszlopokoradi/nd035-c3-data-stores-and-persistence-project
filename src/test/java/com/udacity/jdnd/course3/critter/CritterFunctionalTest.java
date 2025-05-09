@@ -40,10 +40,10 @@ class CritterFunctionalTest {
     void testCreateCustomer() {
         CustomerDTO customerDTO = createCustomerDTO();
         CustomerDTO newCustomer = userController.saveCustomer(customerDTO);
-        CustomerDTO retrievedCustomer = userController.getAllCustomers()
-                                                      .getFirst();
-        Assertions.assertEquals(newCustomer.getName(), customerDTO.getName());
-        Assertions.assertEquals(newCustomer.getId(), retrievedCustomer.getId());
+        CustomerDTO retrievedCustomer = userController.getAllCustomers().getFirst();
+
+        assertThat(newCustomer.getName()).isEqualTo(customerDTO.getName());
+        assertThat(newCustomer.getId()).isEqualTo(retrievedCustomer.getId());
         assertThat(retrievedCustomer.getPetIds()).isInstanceOf(List.class);
     }
 
@@ -52,8 +52,11 @@ class CritterFunctionalTest {
         EmployeeDTO employeeDTO = createEmployeeDTO();
         EmployeeDTO newEmployee = userController.saveEmployee(employeeDTO);
         EmployeeDTO retrievedEmployee = userController.getEmployee(newEmployee.getId());
-        Assertions.assertEquals(employeeDTO.getSkills(), newEmployee.getSkills());
-        Assertions.assertEquals(newEmployee.getId(), retrievedEmployee.getId());
+
+        assertThat(newEmployee.getName()).isEqualTo(employeeDTO.getName());
+        assertThat(employeeDTO.getSkills()).containsExactlyElementsOf(newEmployee.getSkills());
+        assertThat(newEmployee.getDaysAvailable()).isEqualTo(employeeDTO.getDaysAvailable());
+        assertThat(newEmployee.getId()).isEqualTo(retrievedEmployee.getId());
         assertThat(retrievedEmployee.getId()).isInstanceOf(UUID.class);
     }
 
@@ -97,14 +100,12 @@ class CritterFunctionalTest {
         PetDTO newPet = petController.savePet(petDTO);
         petDTO.setType(PetType.DOG);
         petDTO.setName("DogName");
-        PetDTO newPet2 = petController.savePet(petDTO);
+        petController.savePet(petDTO);
 
         List<PetDTO> pets = petController.getPetsByOwner(newCustomer.getId());
-        Assertions.assertEquals(pets.size(), 2);
-        Assertions.assertEquals(pets.get(0)
-                                    .getOwnerId(), newCustomer.getId());
-        Assertions.assertEquals(pets.get(0)
-                                    .getId(), newPet.getId());
+        Assertions.assertEquals(2, pets.size());
+        Assertions.assertEquals(pets.getFirst().getOwnerId(), newCustomer.getId());
+        Assertions.assertEquals(pets.getFirst().getId(), newPet.getId());
     }
 
     @Test
