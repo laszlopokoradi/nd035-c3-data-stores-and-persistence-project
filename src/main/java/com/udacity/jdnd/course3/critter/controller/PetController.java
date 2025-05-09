@@ -1,6 +1,10 @@
-package com.udacity.jdnd.course3.critter.pet;
+package com.udacity.jdnd.course3.critter.controller;
 
+import com.udacity.jdnd.course3.critter.dto.*;
+import com.udacity.jdnd.course3.critter.entity.*;
 import com.udacity.jdnd.course3.critter.mapper.*;
+import com.udacity.jdnd.course3.critter.service.*;
+import jakarta.persistence.*;
 import jakarta.validation.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,32 +34,28 @@ public class PetController {
 
     @GetMapping("/{petId}")
     public PetDTO getPet(@PathVariable UUID petId) {
-        Pet pet = this.petService.getPetById(petId);
+        Optional<Pet> pet = this.petService.getPetById(petId);
 
-        return this.petMapper.toDto(pet);
+        return pet
+                .map(this.petMapper::toDto)
+                .orElseThrow(() -> new EntityNotFoundException("Pet with id %s not found".formatted(petId)));
     }
 
     @GetMapping
     public List<PetDTO> getPets(){
         List<Pet> pets = this.petService.getAllPets();
-        List<PetDTO> petDTOs = new ArrayList<>();
 
-        for (Pet pet : pets) {
-            petDTOs.add(this.petMapper.toDto(pet));
-        }
-
-        return petDTOs;
+        return pets.stream()
+                .map(this.petMapper::toDto)
+                .toList();
     }
 
     @GetMapping("/owner/{ownerId}")
     public List<PetDTO> getPetsByOwner(@PathVariable UUID ownerId) {
         List<Pet> pets = this.petService.getPetsByOwner(ownerId);
-        List<PetDTO> petDTOs = new ArrayList<>();
 
-        for (Pet pet : pets) {
-            petDTOs.add(this.petMapper.toDto(pet));
-        }
-
-        return petDTOs;
+        return pets.stream()
+                .map(this.petMapper::toDto)
+                .toList();
     }
 }

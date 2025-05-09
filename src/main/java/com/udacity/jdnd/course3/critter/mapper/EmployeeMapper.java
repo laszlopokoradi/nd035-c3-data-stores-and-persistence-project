@@ -1,7 +1,8 @@
 package com.udacity.jdnd.course3.critter.mapper;
 
 
-import com.udacity.jdnd.course3.critter.user.*;
+import com.udacity.jdnd.course3.critter.dto.*;
+import com.udacity.jdnd.course3.critter.entity.*;
 import org.mapstruct.*;
 
 

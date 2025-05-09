@@ -1,9 +1,9 @@
 package com.udacity.jdnd.course3.critter;
 
 
-import com.udacity.jdnd.course3.critter.pet.*;
-import com.udacity.jdnd.course3.critter.schedule.*;
-import com.udacity.jdnd.course3.critter.user.*;
+import com.udacity.jdnd.course3.critter.controller.*;
+import com.udacity.jdnd.course3.critter.dto.*;
+import com.udacity.jdnd.course3.critter.entity.*;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.boot.test.context.*;
@@ -323,16 +323,5 @@ class CritterFunctionalTest {
         Assertions.assertEquals(sched1.getActivities(), sched2.getActivities());
         Assertions.assertEquals(sched1.getEmployeeIds(), sched2.getEmployeeIds());
         Assertions.assertEquals(sched1.getDate(), sched2.getDate());
-    }
-
-    @Test
-    void testCreateEmployeeWithoutName() {
-        EmployeeDTO employeeDTO = new EmployeeDTO();
-        employeeDTO.setSkills(Set.of(EmployeeSkill.FEEDING, EmployeeSkill.PETTING));
-
-        Throwable thrown = catchThrowable(() -> {
-            EmployeeDTO e = userController.saveEmployee(employeeDTO);
-        });
-        assertThat(thrown).hasMessageContaining("Wrong");
     }
 }

@@ -1,6 +1,7 @@
-package com.udacity.jdnd.course3.critter.pet;
+package com.udacity.jdnd.course3.critter.dto;
 
 
+import com.udacity.jdnd.course3.critter.entity.*;
 import jakarta.validation.constraints.*;
 import java.time.*;
 import java.util.*;
@@ -21,6 +22,7 @@ public class PetDTO {
     private String name;
 
     @NotNull(message = "Owner ID cannot be null")
+    @org.hibernate.validator.constraints.UUID
     private UUID ownerId;
 
     @PastOrPresent(message = "Birth date cannot be in the future")
@@ -43,6 +45,10 @@ public class PetDTO {
     }
 
     public PetDTO setType(PetType type) {
+        if (type == null) {
+            throw new IllegalArgumentException("Type cannot be null");
+        }
+
         this.type = type;
         return this;
     }
@@ -52,6 +58,10 @@ public class PetDTO {
     }
 
     public PetDTO setName(String name) {
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Name cannot be null or empty");
+        }
+
         this.name = name;
         return this;
     }
@@ -61,6 +71,10 @@ public class PetDTO {
     }
 
     public PetDTO setOwnerId(UUID ownerId) {
+        if (ownerId == null) {
+            throw new IllegalArgumentException("Owner ID cannot be null");
+        }
+
         this.ownerId = ownerId;
         return this;
     }

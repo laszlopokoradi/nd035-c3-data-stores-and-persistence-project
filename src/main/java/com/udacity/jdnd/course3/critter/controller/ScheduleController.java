@@ -1,7 +1,11 @@
-package com.udacity.jdnd.course3.critter.schedule;
+package com.udacity.jdnd.course3.critter.controller;
 
 
+import com.udacity.jdnd.course3.critter.dto.*;
+import com.udacity.jdnd.course3.critter.entity.*;
 import com.udacity.jdnd.course3.critter.mapper.*;
+import com.udacity.jdnd.course3.critter.service.*;
+import jakarta.validation.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -22,7 +26,7 @@ public class ScheduleController {
     }
 
     @PostMapping
-    public ScheduleDTO createSchedule(@RequestBody ScheduleDTO scheduleDTO) {
+    public ScheduleDTO createSchedule(@RequestBody @Valid ScheduleDTO scheduleDTO) {
         Schedule createdSchedule = this.scheduleService.createSchedule(scheduleMapper.toEntity(scheduleDTO));
 
         return scheduleMapper.toDto(createdSchedule);

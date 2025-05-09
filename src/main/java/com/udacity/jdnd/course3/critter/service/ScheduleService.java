@@ -1,6 +1,8 @@
-package com.udacity.jdnd.course3.critter.schedule;
+package com.udacity.jdnd.course3.critter.service;
 
 
+import com.udacity.jdnd.course3.critter.entity.*;
+import com.udacity.jdnd.course3.critter.repository.*;
 import org.springframework.stereotype.*;
 
 import java.util.*;
@@ -40,7 +42,7 @@ public class ScheduleService {
         return this.scheduleRepository.findAllByEmployeeId(employeeId);
     }
 
-    protected List<Schedule> getSchedulesForCustomer(UUID customerId) {
+    public List<Schedule> getSchedulesForCustomer(UUID customerId) {
         return this.scheduleRepository.findAllByCustomerId(customerId);
     }
 }

@@ -14,8 +14,7 @@ import java.util.*;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Map<String, String> handleValidationExceptions(MethodArgumentNotValidException ex) {
+    public ResponseEntity<ProblemDetail> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
         ex.getBindingResult()
           .getAllErrors()
@@ -24,12 +23,13 @@ public class GlobalExceptionHandler {
               String errorMessage = error.getDefaultMessage();
               errors.put(fieldName, errorMessage);
           });
-        throw new RuntimeException("Wrong parameters: " + errors);
+
+        return createBadRequestResponse(errors);
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Map<String, String> handleConstraintViolation(ConstraintViolationException ex) {
+    public ResponseEntity<ProblemDetail> handleConstraintViolation(ConstraintViolationException ex) {
         Map<String, String> errors = new HashMap<>();
         ex.getConstraintViolations()
           .forEach(violation -> {
@@ -38,6 +38,17 @@ public class GlobalExceptionHandler {
               String errorMessage = violation.getMessage();
               errors.put(fieldName, errorMessage);
           });
-        throw new RuntimeException("Wrong parameters: " + errors);
+
+        return createBadRequestResponse(errors);
+    }
+
+    private static ResponseEntity<ProblemDetail> createBadRequestResponse(Map<String, String> errors) {
+        ProblemDetail problemDetail = ProblemDetail
+                .forStatusAndDetail(HttpStatus.BAD_REQUEST, "Wrong parameters: " + errors);
+        problemDetail.setTitle("Validation Error");
+
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(problemDetail);
     }
 }
