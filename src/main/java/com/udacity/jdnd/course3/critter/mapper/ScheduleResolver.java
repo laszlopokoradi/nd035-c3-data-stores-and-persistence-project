@@ -13,7 +13,7 @@ public class ScheduleResolver {
 
     Set<Pet> resolvePetIds(List<UUID> petIds) {
         if (petIds == null) {
-            return null;
+            return Collections.emptySet();
         }
 
         return petIds.stream().map(
@@ -27,7 +27,7 @@ public class ScheduleResolver {
 
     List<UUID> resolvePets(Set<Pet> pets) {
         if (pets == null) {
-            return null;
+            return Collections.emptyList();
         }
 
         return pets.stream().map(Pet::getId).toList();

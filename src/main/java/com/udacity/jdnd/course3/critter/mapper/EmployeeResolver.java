@@ -35,7 +35,7 @@ public class EmployeeResolver {
 
     public List<Employee> resolveEmployeeIds(List<UUID> employeeIds) {
         if (employeeIds == null) {
-            return null;
+            return Collections.emptyList();
         }
 
         return employeeIds.stream()
