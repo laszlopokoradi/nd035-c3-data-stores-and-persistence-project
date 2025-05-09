@@ -25,10 +25,10 @@ public class Pet {
     @JoinColumn(name = "customer_id")
     private Customer owner;
 
-    @Column(name = "birth_date", nullable = true)
+    @Column(name = "birth_date")
     private LocalDate birthDate;
 
-    @Column(name = "notes", nullable = true)
+    @Column(name = "notes")
     private String notes;
 
     public Pet setId(UUID id) {

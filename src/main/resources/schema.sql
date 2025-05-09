@@ -43,8 +43,14 @@ CREATE TABLE IF NOT EXISTS pets
     CONSTRAINT pk_pets PRIMARY KEY (id)
 );
 
-ALTER TABLE pets
+ALTER TABLE  pets
     ADD CONSTRAINT FK_PETS_ON_CUSTOMER FOREIGN KEY (customer_id) REFERENCES customers (id);
+
+CREATE TABLE IF NOT EXISTS schedule_activities
+(
+    schedule_id BIGINT       NOT NULL,
+    activities  VARCHAR(255) NULL
+);
 
 CREATE TABLE IF NOT EXISTS schedule_employees
 (
@@ -64,6 +70,9 @@ CREATE TABLE IF NOT EXISTS schedules
     date date                  NULL,
     CONSTRAINT pk_schedules PRIMARY KEY (id)
 );
+
+ALTER TABLE schedule_activities
+    ADD CONSTRAINT fk_schedule_activities_on_schedule FOREIGN KEY (schedule_id) REFERENCES schedules (id);
 
 ALTER TABLE schedule_employees
     ADD CONSTRAINT fk_schemp_on_employee FOREIGN KEY (employee_id) REFERENCES employees (id);
