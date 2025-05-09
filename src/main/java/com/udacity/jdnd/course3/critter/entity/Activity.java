@@ -1,11 +1,11 @@
 package com.udacity.jdnd.course3.critter.entity;
 
 import jakarta.persistence.*;
-import java.util.*;
 
 @Entity
-@Table(name = "pet_types")
-public class PetType {
+@Table(name = "activities")
+public class Activity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -13,19 +13,11 @@ public class PetType {
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 
-    @ManyToMany
-    @JoinTable(
-            name = "pet_type_activities",
-            joinColumns = @JoinColumn(name = "pet_type_id"),
-            inverseJoinColumns = @JoinColumn(name = "activity_id")
-    )
-    private Set<Activity> activities = new HashSet<>();
-
     public Long getId() {
         return id;
     }
 
-    public PetType setId(Long id) {
+    public Activity setId(Long id) {
         this.id = id;
         return this;
     }
@@ -34,7 +26,7 @@ public class PetType {
         return name;
     }
 
-    public PetType setName(String name) {
+    public Activity setName(String name) {
         this.name = name;
         return this;
     }

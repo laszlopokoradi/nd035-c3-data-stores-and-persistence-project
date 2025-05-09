@@ -27,31 +27,35 @@ public class EmployeeDTO {
         return id;
     }
 
-    public void setId(UUID id) {
+    public EmployeeDTO setId(UUID id) {
         this.id = id;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public EmployeeDTO setName(String name) {
         this.name = name;
+        return this;
     }
 
     public Set<EmployeeSkill> getSkills() {
         return skills;
     }
 
-    public void setSkills(Set<EmployeeSkill> skills) {
+    public EmployeeDTO setSkills(Set<EmployeeSkill> skills) {
         this.skills = skills;
+        return this;
     }
 
     public Set<DayOfWeek> getDaysAvailable() {
         return daysAvailable;
     }
 
-    public void setDaysAvailable(Set<DayOfWeek> daysAvailable) {
+    public EmployeeDTO setDaysAvailable(Set<DayOfWeek> daysAvailable) {
         this.daysAvailable = daysAvailable;
+        return this;
     }
 }

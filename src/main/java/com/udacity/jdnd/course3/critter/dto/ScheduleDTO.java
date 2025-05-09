@@ -1,6 +1,6 @@
 package com.udacity.jdnd.course3.critter.dto;
 
-import com.udacity.jdnd.course3.critter.entity.EmployeeSkill;
+import com.udacity.jdnd.course3.critter.entity.*;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -15,45 +15,50 @@ public class ScheduleDTO {
     private List<UUID> employeeIds;
     private List<UUID> petIds;
     private LocalDate date;
-    private Set<EmployeeSkill> activities;
+    private Set<Activity> activities;
 
     public Long getId(){
         return id;
     }
     
-    public void setId(Long id){
+    public ScheduleDTO setId(Long id){
         this.id = id;
+        return this;
     }
     
     public List<UUID> getEmployeeIds() {
         return employeeIds;
     }
 
-    public void setEmployeeIds(List<UUID> employeeIds) {
+    public ScheduleDTO setEmployeeIds(List<UUID> employeeIds) {
         this.employeeIds = employeeIds;
+        return this;
     }
 
     public List<UUID> getPetIds() {
         return petIds;
     }
 
-    public void setPetIds(List<UUID> petIds) {
+    public ScheduleDTO setPetIds(List<UUID> petIds) {
         this.petIds = petIds;
+        return this;
     }
 
     public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public ScheduleDTO setDate(LocalDate date) {
         this.date = date;
+        return this;
     }
 
-    public Set<EmployeeSkill> getActivities() {
+    public Set<Activity> getActivities() {
         return activities;
     }
 
-    public void setActivities(Set<EmployeeSkill> activities) {
+    public ScheduleDTO setActivities(Set<Activity> activities) {
         this.activities = activities;
+        return this;
     }
 }

@@ -11,10 +11,13 @@ import java.util.*;
 @Table(name = "employees")
 public class Employee extends User {
 
-    @ElementCollection(targetClass = EmployeeSkill.class)
-    @CollectionTable(name = "employee_skills", joinColumns = @JoinColumn(name = "employee_id"))
-    @Enumerated(EnumType.STRING)
-    private Set<EmployeeSkill> skills;
+    @ManyToMany
+    @JoinTable(
+            name = "schedule_activities",
+            joinColumns = @JoinColumn(name = "schedule_id"),
+            inverseJoinColumns = @JoinColumn(name = "activity_id")
+    )
+    private Set<Activity> skills;
 
     @ElementCollection(targetClass = DayOfWeek.class)
     @CollectionTable(name = "employee_days_available", joinColumns = @JoinColumn(name = "employee_id"))
@@ -33,12 +36,12 @@ public class Employee extends User {
         return this;
     }
 
-    public Set<EmployeeSkill> getSkills() {
+    public Set<Activity> getSkills() {
         return skills;
     }
 
     public Employee setSkills(
-            Set<EmployeeSkill> skills) {
+            Set<Activity> skills) {
         this.skills = skills;
         return this;
     }
