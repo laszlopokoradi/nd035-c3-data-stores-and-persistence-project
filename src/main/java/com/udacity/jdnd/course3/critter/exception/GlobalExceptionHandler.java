@@ -1,6 +1,7 @@
 package com.udacity.jdnd.course3.critter.exception;
 
 
+import jakarta.persistence.*;
 import jakarta.validation.*;
 import org.springframework.http.*;
 import org.springframework.validation.*;
@@ -24,7 +25,7 @@ public class GlobalExceptionHandler {
               errors.put(fieldName, errorMessage);
           });
 
-        return createBadRequestResponse(errors);
+        return createBadRequestResponse(errors.toString());
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
@@ -39,10 +40,16 @@ public class GlobalExceptionHandler {
               errors.put(fieldName, errorMessage);
           });
 
-        return createBadRequestResponse(errors);
+        return createBadRequestResponse(errors.toString());
     }
 
-    private static ResponseEntity<ProblemDetail> createBadRequestResponse(Map<String, String> errors) {
+    @ExceptionHandler(EntityNotFoundException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<ProblemDetail> handleEntityNotFoundException(EntityNotFoundException ex) {
+        return createBadRequestResponse(ex.getMessage());
+    }
+
+    private static ResponseEntity<ProblemDetail> createBadRequestResponse(String errors) {
         ProblemDetail problemDetail = ProblemDetail
                 .forStatusAndDetail(HttpStatus.BAD_REQUEST, "Wrong parameters: " + errors);
         problemDetail.setTitle("Validation Error");

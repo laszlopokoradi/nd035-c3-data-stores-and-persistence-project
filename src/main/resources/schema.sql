@@ -1,11 +1,11 @@
-CREATE TABLE activities
+CREATE TABLE IF NOT EXISTS activities
 (
     id   BIGINT AUTO_INCREMENT NOT NULL,
     name VARCHAR(255)          NOT NULL,
     CONSTRAINT pk_activities PRIMARY KEY (id)
 );
 
-CREATE TABLE customers
+CREATE TABLE IF NOT EXISTS customers
 (
     id           BINARY(16)   NOT NULL,
     name         VARCHAR(255) NOT NULL,
@@ -14,34 +14,34 @@ CREATE TABLE customers
     CONSTRAINT pk_customers PRIMARY KEY (id)
 );
 
-CREATE TABLE employee_activities
+CREATE TABLE IF NOT EXISTS employee_activities
 (
     activity_id BIGINT     NOT NULL,
     employee_id BINARY(16) NOT NULL,
     CONSTRAINT pk_employee_activities PRIMARY KEY (activity_id, employee_id)
 );
 
-CREATE TABLE employee_days_available
+CREATE TABLE IF NOT EXISTS employee_days_available
 (
     employee_id    BINARY(16) NOT NULL,
     days_available SMALLINT   NULL
 );
 
-CREATE TABLE employees
+CREATE TABLE IF NOT EXISTS employees
 (
     id   BINARY(16)   NOT NULL,
     name VARCHAR(255) NOT NULL,
     CONSTRAINT pk_employees PRIMARY KEY (id)
 );
 
-CREATE TABLE schedule_activities
+CREATE TABLE IF NOT EXISTS schedule_activities
 (
     activity_id BIGINT     NOT NULL,
     schedule_id BINARY(16) NOT NULL,
     CONSTRAINT pk_schedule_activities PRIMARY KEY (activity_id, schedule_id)
 );
 
-CREATE TABLE pets
+CREATE TABLE IF NOT EXISTS pets
 (
     id          BINARY(16)   NOT NULL,
     pet_type_id BIGINT       NOT NULL,
@@ -52,33 +52,33 @@ CREATE TABLE pets
     CONSTRAINT pk_pets PRIMARY KEY (id)
 );
 
-CREATE TABLE pet_type_activities
+CREATE TABLE IF NOT EXISTS pet_type_activities
 (
     activity_id BIGINT NOT NULL,
     pet_type_id BIGINT NOT NULL,
     CONSTRAINT pk_pet_type_activities PRIMARY KEY (activity_id, pet_type_id)
 );
 
-CREATE TABLE pet_types
+CREATE TABLE IF NOT EXISTS pet_types
 (
     id   BIGINT AUTO_INCREMENT NOT NULL,
     name VARCHAR(255)          NOT NULL,
     CONSTRAINT pk_pet_types PRIMARY KEY (id)
 );
 
-CREATE TABLE schedule_employees
+CREATE TABLE IF NOT EXISTS schedule_employees
 (
     employee_id BINARY(16) NOT NULL,
     schedule_id BIGINT     NOT NULL
 );
 
-CREATE TABLE schedule_pets
+CREATE TABLE IF NOT EXISTS schedule_pets
 (
     pet_id      BINARY(16) NOT NULL,
     schedule_id BIGINT     NOT NULL
 );
 
-CREATE TABLE schedules
+CREATE TABLE IF NOT EXISTS schedules
 (
     id   BIGINT AUTO_INCREMENT NOT NULL,
     date date                  NULL,

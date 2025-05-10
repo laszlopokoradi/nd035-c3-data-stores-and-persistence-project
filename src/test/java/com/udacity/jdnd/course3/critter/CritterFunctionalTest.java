@@ -11,8 +11,6 @@ import java.util.stream.*;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.boot.test.context.*;
-import org.springframework.test.context.jdbc.*;
-import org.springframework.test.context.jdbc.Sql.*;
 import org.springframework.transaction.annotation.*;
 
 
@@ -25,7 +23,6 @@ import org.springframework.transaction.annotation.*;
  * <p>
  * These tests should all pass once the project is complete.
  */
-@Sql(scripts = "/global-setup.sql", executionPhase = ExecutionPhase.BEFORE_TEST_CLASS)
 @SpringBootTest(classes = CritterApplication.class)
 @Transactional
 class CritterFunctionalTest {
