@@ -76,16 +76,19 @@ public class UserController {
     }
 
     @PutMapping("/employee/{employeeId}")
-    public void setAvailability(@PathVariable UUID employeeId,
+    public EmployeeDTO setAvailability(@PathVariable UUID employeeId,
             @RequestBody Set<DayOfWeek> daysAvailable) {
         Optional<Employee> employee = this.userService.getEmployee(employeeId);
 
+        Employee e;
         if (employee.isPresent()) {
-            Employee e = employee.get();
+            e = employee.get();
             e.setDaysAvailable(daysAvailable);
         } else {
             throw new EntityNotFoundException("No employee (id: %s) found".formatted(employeeId));
         }
+
+        return employeeMapper.toDTO(e);
     }
 
     @GetMapping("/employee/availability")

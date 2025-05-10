@@ -18,7 +18,6 @@ public class EmployeeDTO {
     @NotEmpty(message = "Employee must have at least one skill")
     private Set<Long> skills;
 
-    @NotEmpty(message = "Employee must have at least one day available")
     private Set<DayOfWeek> daysAvailable;
 
     public UUID getId() {

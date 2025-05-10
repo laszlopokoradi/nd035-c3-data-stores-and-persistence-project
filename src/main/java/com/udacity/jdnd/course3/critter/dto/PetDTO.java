@@ -21,7 +21,6 @@ public class PetDTO {
     private String name;
 
     @NotNull(message = "Owner ID cannot be null")
-    @org.hibernate.validator.constraints.UUID
     private UUID ownerId;
 
     @PastOrPresent(message = "Birth date cannot be in the future")
