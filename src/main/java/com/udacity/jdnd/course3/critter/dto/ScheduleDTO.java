@@ -10,8 +10,8 @@ import java.util.*;
  */
 public class ScheduleDTO {
     private Long id;
-    private List<UUID> employeeIds;
-    private List<UUID> petIds;
+    private List<UUID> employees;
+    private List<UUID> pets;
     private LocalDate date;
     private Set<Long> activities;
 
@@ -24,21 +24,21 @@ public class ScheduleDTO {
         return this;
     }
     
-    public List<UUID> getEmployeeIds() {
-        return employeeIds;
+    public List<UUID> getEmployees() {
+        return employees;
     }
 
-    public ScheduleDTO setEmployeeIds(List<UUID> employeeIds) {
-        this.employeeIds = employeeIds;
+    public ScheduleDTO setEmployees(List<UUID> employees) {
+        this.employees = employees;
         return this;
     }
 
-    public List<UUID> getPetIds() {
-        return petIds;
+    public List<UUID> getPets() {
+        return pets;
     }
 
-    public ScheduleDTO setPetIds(List<UUID> petIds) {
-        this.petIds = petIds;
+    public ScheduleDTO setPets(List<UUID> pets) {
+        this.pets = pets;
         return this;
     }
 

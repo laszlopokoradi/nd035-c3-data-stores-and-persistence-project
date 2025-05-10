@@ -47,7 +47,7 @@ class CritterFunctionalTest {
 
         assertThat(newCustomer.getName()).isEqualTo(customerDTO.getName());
         assertThat(newCustomer.getId()).isEqualTo(retrievedCustomer.getId());
-        assertThat(retrievedCustomer.getPetIds()).isInstanceOf(List.class);
+        assertThat(retrievedCustomer.getPets()).isInstanceOf(List.class);
     }
 
     @Test
@@ -75,7 +75,7 @@ class CritterFunctionalTest {
         //make sure pet contains customer id
         PetDTO retrievedPet = petController.getPet(newPet.getId());
         Assertions.assertEquals(retrievedPet.getId(), newPet.getId());
-        Assertions.assertEquals(retrievedPet.getOwnerId(), newCustomer.getId());
+        Assertions.assertEquals(retrievedPet.getOwner(), newCustomer.getId());
 
         //make sure you can retrieve pets by owner
         List<PetDTO> pets = petController.getPetsByOwner(newCustomer.getId());
@@ -88,9 +88,9 @@ class CritterFunctionalTest {
         CustomerDTO retrievedCustomer = userController.getAllCustomers()
                                                       .getFirst();
         Assertions.assertTrue(
-                retrievedCustomer.getPetIds() != null && !retrievedCustomer.getPetIds()
+                retrievedCustomer.getPets() != null && !retrievedCustomer.getPets()
                                                                            .isEmpty());
-        Assertions.assertEquals(retrievedCustomer.getPetIds()
+        Assertions.assertEquals(retrievedCustomer.getPets()
                                                  .getFirst(), retrievedPet.getId());
     }
 
@@ -110,10 +110,10 @@ class CritterFunctionalTest {
         List<PetDTO> pets = petController.getPetsByOwner(newCustomer.getId());
         assertThat(pets).hasSize(2);
 
-        assertThat(pets.getFirst().getOwnerId()).isEqualTo(newCustomer.getId());
+        assertThat(pets.getFirst().getOwner()).isEqualTo(newCustomer.getId());
         assertThat(pets.getFirst().getId()).isEqualTo(newPet.getId());
 
-        assertThat(pets.get(1).getOwnerId()).isEqualTo(newCustomer.getId());
+        assertThat(pets.get(1).getOwner()).isEqualTo(newCustomer.getId());
         assertThat(pets.get(1).getId()).isEqualTo(newPet2.getId());
     }
 
@@ -128,7 +128,7 @@ class CritterFunctionalTest {
 
         CustomerDTO owner = userController.getOwnerByPet(newPet.getId());
         Assertions.assertEquals(owner.getId(), newCustomer.getId());
-        Assertions.assertEquals(owner.getPetIds().getFirst(), newPet.getId());
+        Assertions.assertEquals(owner.getPets().getFirst(), newPet.getId());
     }
 
     @Test
@@ -210,8 +210,8 @@ class CritterFunctionalTest {
 
         assertThat(scheduleDTO.getActivities()).isEqualTo(skillSet);
         assertThat(scheduleDTO.getDate()).isEqualTo(date);
-        assertThat(scheduleDTO.getEmployeeIds()).isEqualTo(employeeList);
-        assertThat(scheduleDTO.getPetIds()).isEqualTo(petList);
+        assertThat(scheduleDTO.getEmployees()).isEqualTo(employeeList);
+        assertThat(scheduleDTO.getPets()).isEqualTo(petList);
     }
 
     @Test
@@ -223,8 +223,8 @@ class CritterFunctionalTest {
 
         //add a third schedule that shares some employees and pets with the other schedules
         ScheduleDTO sched3 = new ScheduleDTO()
-                .setEmployeeIds(sched1.getEmployeeIds())
-                .setPetIds(sched2.getPetIds())
+                .setEmployees(sched1.getEmployees())
+                .setPets(sched2.getPets())
                 .setActivities(Set.of(5L, 1L))
                 .setDate(LocalDate.of(2020, 3, 23));
         scheduleController.createSchedule(sched3);
@@ -237,38 +237,38 @@ class CritterFunctionalTest {
 
         //Employee 1 in is both schedule 1 and 3
         List<ScheduleDTO> scheds1e = scheduleController.getScheduleForEmployee(
-                sched1.getEmployeeIds()
+                sched1.getEmployees()
                       .getFirst());
         compareSchedules(sched1, scheds1e.getFirst());
         compareSchedules(sched3, scheds1e.get(1));
 
         //Employee 2 is only in schedule 2
         List<ScheduleDTO> scheds2e = scheduleController.getScheduleForEmployee(
-                sched2.getEmployeeIds()
+                sched2.getEmployees()
                       .getFirst());
         compareSchedules(sched2, scheds2e.getFirst());
 
         //Pet 1 is only in schedule 1
-        List<ScheduleDTO> scheds1p = scheduleController.getScheduleForPet(sched1.getPetIds()
+        List<ScheduleDTO> scheds1p = scheduleController.getScheduleForPet(sched1.getPets()
                                                                                 .getFirst());
         compareSchedules(sched1, scheds1p.getFirst());
 
         //Pet from schedule 2 is in both schedules 2 and 3
-        List<ScheduleDTO> scheds2p = scheduleController.getScheduleForPet(sched2.getPetIds()
+        List<ScheduleDTO> scheds2p = scheduleController.getScheduleForPet(sched2.getPets()
                                                                                 .getFirst());
         compareSchedules(sched2, scheds2p.getFirst());
         compareSchedules(sched3, scheds2p.get(1));
 
         //Owner of the first pet will only be in schedule 1
         List<ScheduleDTO> scheds1c = scheduleController.getScheduleForCustomer(
-                userController.getOwnerByPet(sched1.getPetIds()
+                userController.getOwnerByPet(sched1.getPets()
                                                    .getFirst())
                               .getId());
         compareSchedules(sched1, scheds1c.getFirst());
 
         //Owner of pet from schedule 2 will be in both schedules 2 and 3
         List<ScheduleDTO> scheds2c = scheduleController.getScheduleForCustomer(
-                userController.getOwnerByPet(sched2.getPetIds()
+                userController.getOwnerByPet(sched2.getPets()
                                                    .getFirst())
                               .getId());
         compareSchedules(sched2, scheds2c.getFirst());
@@ -303,8 +303,8 @@ class CritterFunctionalTest {
     private static ScheduleDTO createScheduleDTO(List<UUID> petIds, List<UUID> employeeIds,
             LocalDate date, Set<Long> activities) {
         return new ScheduleDTO()
-                .setPetIds(petIds)
-                .setEmployeeIds(employeeIds)
+                .setPets(petIds)
+                .setEmployees(employeeIds)
                 .setDate(date)
                 .setActivities(activities);
     }
@@ -334,9 +334,9 @@ class CritterFunctionalTest {
     }
 
     private static void compareSchedules(ScheduleDTO expectedSchedule, ScheduleDTO actualSchedule) {
-        assertThat(actualSchedule.getPetIds()).isEqualTo(expectedSchedule.getPetIds());
+        assertThat(actualSchedule.getPets()).isEqualTo(expectedSchedule.getPets());
         assertThat(actualSchedule.getActivities()).isEqualTo(expectedSchedule.getActivities());
-        assertThat(actualSchedule.getEmployeeIds()).isEqualTo(expectedSchedule.getEmployeeIds());
+        assertThat(actualSchedule.getEmployees()).isEqualTo(expectedSchedule.getEmployees());
         assertThat(actualSchedule.getDate()).isEqualTo(expectedSchedule.getDate());
     }
 }

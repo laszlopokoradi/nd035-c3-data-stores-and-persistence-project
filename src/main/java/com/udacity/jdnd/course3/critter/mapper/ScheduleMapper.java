@@ -9,13 +9,13 @@ import org.mapstruct.*;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING
 , uses = {PetResolver.class, CustomerResolver.class, EmployeeResolver.class, ActivityResolver.class})
 public interface ScheduleMapper {
-    @Mapping(target = "employees", source = "employeeIds")
-    @Mapping(target = "pets", source = "petIds")
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "pets", source = "pets")
+    @Mapping(target = "employees", source = "employees")
     Schedule toEntity(ScheduleDTO scheduleDTO);
-    
-    @Mapping(target = "petIds", source = "pets")
-    @Mapping(target = "employeeIds", source = "employees")
-    @Mapping(target = "activities", source = "activities")
+
+    @Mapping(target = "pets", source = "pets")
+    @Mapping(target = "employees", source = "employees")
     ScheduleDTO toDTO(Schedule schedule);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

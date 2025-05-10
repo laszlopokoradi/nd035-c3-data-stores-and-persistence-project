@@ -9,8 +9,8 @@ public interface ActivityMapper {
     @Mapping(target = "id", ignore = true)
     Activity toEntity(ActivityDTO activityDTO);
 
-    @Mapping(target = "id", ignore = true)
-    void updateFromDTO(ActivityDTO dto, @MappingTarget Activity pet);
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    Activity updateFromDTO(ActivityDTO dto, @MappingTarget Activity pet);
 
     ActivityDTO toDTO(Activity activity);
 }

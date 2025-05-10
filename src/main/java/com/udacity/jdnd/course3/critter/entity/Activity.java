@@ -30,4 +30,20 @@ public class Activity {
         this.name = name;
         return this;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof Activity)) {
+            return false;
+        }
+        return this.name.equals(((Activity) obj).getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return this.name.hashCode();
+    }
 }

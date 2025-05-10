@@ -7,13 +7,11 @@ import org.mapstruct.*;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = {CustomerResolver.class, PetTypeResolver.class})
 public interface PetMapper {
 
-    @Mapping(source = "ownerId", target = "owner")
     @Mapping(target = "id", ignore = true)
     Pet toEntity(PetDTO dto);
 
-    @Mapping(source = "ownerId", target = "owner")
-    @Mapping(target = "id", ignore = true)
-    void updateFromDTO(PetDTO dto, @MappingTarget Pet pet);
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    Pet updateFromDTO(PetDTO dto, @MappingTarget Pet pet);
 
     @Mapping(source = "owner", target = "ownerId")
     PetDTO toDTO(Pet pet);

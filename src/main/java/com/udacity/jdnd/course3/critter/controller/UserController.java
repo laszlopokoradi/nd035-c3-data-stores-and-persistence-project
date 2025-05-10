@@ -83,7 +83,8 @@ public class UserController {
         Employee e;
         if (employee.isPresent()) {
             e = employee.get();
-            e.setDaysAvailable(daysAvailable);
+            e.setDaysAvailable(new HashSet<>(daysAvailable));
+            this.userService.updateEmployee(e);
         } else {
             throw new EntityNotFoundException("No employee (id: %s) found".formatted(employeeId));
         }

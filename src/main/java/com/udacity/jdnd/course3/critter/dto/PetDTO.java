@@ -15,13 +15,13 @@ public class PetDTO {
     private UUID id;
 
     @NotNull(message = "Type cannot be null")
-    private Long typeId;
+    private Long type;
 
     @NotNull(message = "Name cannot be null")
     private String name;
 
     @NotNull(message = "Owner ID cannot be null")
-    private UUID ownerId;
+    private UUID owner;
 
     @PastOrPresent(message = "Birth date cannot be in the future")
     private LocalDate birthDate;
@@ -39,15 +39,15 @@ public class PetDTO {
     }
 
     public Long getType() {
-        return typeId;
+        return type;
     }
 
-    public PetDTO setType(Long typeId) {
-        if (typeId == null) {
+    public PetDTO setType(Long type) {
+        if (type == null) {
             throw new IllegalArgumentException("Type cannot be null");
         }
 
-        this.typeId = typeId;
+        this.type = type;
         return this;
     }
 
@@ -64,16 +64,16 @@ public class PetDTO {
         return this;
     }
 
-    public UUID getOwnerId() {
-        return ownerId;
+    public UUID getOwner() {
+        return owner;
     }
 
-    public PetDTO setOwnerId(UUID ownerId) {
-        if (ownerId == null) {
+    public PetDTO setOwnerId(UUID owner) {
+        if (owner == null) {
             throw new IllegalArgumentException("Owner ID cannot be null");
         }
 
-        this.ownerId = ownerId;
+        this.owner = owner;
         return this;
     }
 

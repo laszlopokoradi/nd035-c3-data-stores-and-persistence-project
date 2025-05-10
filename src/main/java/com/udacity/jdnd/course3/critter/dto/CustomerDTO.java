@@ -21,7 +21,7 @@ public class CustomerDTO {
 
     private String notes;
 
-    private List<UUID> petIds = new ArrayList<>();
+    private List<UUID> pets = new ArrayList<>();
 
     public UUID getId() {
         return id;
@@ -59,12 +59,12 @@ public class CustomerDTO {
         return this;
     }
 
-    public List<UUID> getPetIds() {
-        return petIds;
+    public List<UUID> getPets() {
+        return pets;
     }
 
-    public CustomerDTO setPetIds(List<UUID> petIds) {
-        this.petIds = petIds;
+    public CustomerDTO setPets(List<UUID> pets) {
+        this.pets = pets;
         return this;
     }
 }

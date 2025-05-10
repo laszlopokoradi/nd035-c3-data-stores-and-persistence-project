@@ -26,6 +26,10 @@ public class UserService {
         return this.employeeRepository.save(employee);
     }
 
+    public Employee updateEmployee(Employee employee) {
+        return this.employeeRepository.save(employee);
+    }
+
     public List<Customer> getAllCustomers() {
         return this.customerRepository.findAll();
     }

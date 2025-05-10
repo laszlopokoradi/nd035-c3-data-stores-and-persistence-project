@@ -4,6 +4,7 @@ import com.udacity.jdnd.course3.critter.dto.*;
 import com.udacity.jdnd.course3.critter.entity.*;
 import org.mapstruct.*;
 import org.mapstruct.MappingConstants.*;
+import org.springframework.jmx.export.annotation.*;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = ComponentModel.SPRING,
         uses = {ActivityResolver.class})

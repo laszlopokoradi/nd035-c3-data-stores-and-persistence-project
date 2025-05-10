@@ -32,13 +32,13 @@ public class PetResolver {
         return pet.getId();
     }
 
-    public List<UUID> map(List<Pet> pets) {
-        if (pets == null) {
-            return Collections.emptyList();
-        }
-
-        return pets.stream()
-                    .map(this::resolvePet)
-                    .toList();
-    }
+//    public List<UUID> map(List<Pet> pets) {
+//        if (pets == null) {
+//            return Collections.emptyList();
+//        }
+//
+//        return pets.stream()
+//                    .map(this::resolvePet)
+//                    .toList();
+//    }
 }

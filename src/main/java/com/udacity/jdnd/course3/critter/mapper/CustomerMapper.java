@@ -8,14 +8,12 @@ import org.mapstruct.MappingConstants.*;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = ComponentModel.SPRING,
         uses = {PetResolver.class, CustomerResolver.class, PetTypeResolver.class})
 public interface CustomerMapper {
-    @Mapping(source = "petIds", target = "pets")
     @Mapping(target = "id", ignore = true)
     Customer toEntity(CustomerDTO customerDTO );
 
-    @Mapping(source = "ownerId", target = "owner")
-    @Mapping(target = "id", ignore = true)
-    void updateFromDTO(PetDTO dto, @MappingTarget Pet pet);
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    Customer updateFromDTO(CustomerDTO dto, @MappingTarget Customer pet);
 
-    @Mapping(source = "pets", target = "petIds")
+    @Mapping(source = "pets", target = "pets")
     CustomerDTO toDTO(Customer customer);
 }
