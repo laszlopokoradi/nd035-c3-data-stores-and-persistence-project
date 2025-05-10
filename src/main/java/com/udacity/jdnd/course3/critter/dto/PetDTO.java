@@ -1,7 +1,6 @@
 package com.udacity.jdnd.course3.critter.dto;
 
 
-import com.udacity.jdnd.course3.critter.entity.*;
 import jakarta.validation.constraints.*;
 import java.time.*;
 import java.util.*;
@@ -16,7 +15,7 @@ public class PetDTO {
     private UUID id;
 
     @NotNull(message = "Type cannot be null")
-    private PetType type;
+    private Long typeId;
 
     @NotNull(message = "Name cannot be null")
     private String name;
@@ -40,16 +39,16 @@ public class PetDTO {
         return this;
     }
 
-    public PetType getType() {
-        return type;
+    public Long getType() {
+        return typeId;
     }
 
-    public PetDTO setType(PetType type) {
-        if (type == null) {
+    public PetDTO setType(Long typeId) {
+        if (typeId == null) {
             throw new IllegalArgumentException("Type cannot be null");
         }
 
-        this.type = type;
+        this.typeId = typeId;
         return this;
     }
 

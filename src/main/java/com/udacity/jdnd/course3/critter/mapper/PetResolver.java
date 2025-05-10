@@ -15,7 +15,7 @@ public class PetResolver {
         this.petRepository = petRepository;
     }
 
-    public Pet resolvePet(UUID petId) {
+    public Pet resolvePetId(UUID petId) {
         if (petId == null) {
             return null;
         }
@@ -24,13 +24,21 @@ public class PetResolver {
                                     "Pet not found with id: " + petId));
     }
 
-    public List<UUID> map(List<Pet> pets) {
-        if (pets == null) {
+    public UUID resolvePet(Pet pet) {
+        if (pet == null) {
             return null;
         }
 
+        return pet.getId();
+    }
+
+    public List<UUID> map(List<Pet> pets) {
+        if (pets == null) {
+            return Collections.emptyList();
+        }
+
         return pets.stream()
-                    .map(Pet::getId)
+                    .map(this::resolvePet)
                     .toList();
     }
 }

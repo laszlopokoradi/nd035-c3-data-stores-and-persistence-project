@@ -2,14 +2,13 @@ package com.udacity.jdnd.course3.critter.service;
 
 import com.udacity.jdnd.course3.critter.entity.*;
 import com.udacity.jdnd.course3.critter.repository.*;
-import org.springframework.stereotype.*;
-
-import java.time.*;
 import java.util.*;
+import org.springframework.stereotype.*;
 
 
 @Service
 public class UserService {
+
     private final CustomerRepository customerRepository;
     private final EmployeeRepository employeeRepository;
 
@@ -39,12 +38,12 @@ public class UserService {
         return this.employeeRepository.findById(employeeId);
     }
 
-    public List<Employee> findAvailableEmployees(LocalDate date, Set<EmployeeSkill> skills) {
+    public List<Employee> findAvailableEmployees(EmployeeRequest request) {
         List<Employee> employees = this.employeeRepository.findAll();
 
         return employees.stream()
-                        .filter(employee -> employee.getDaysAvailable().contains(date.getDayOfWeek()))
-                        .filter(employee -> employee.getSkills().containsAll(skills))
+                        .filter(employee -> employee.getDaysAvailable().contains(request.getDate().getDayOfWeek()))
+                        .filter(employee -> employee.getSkills().containsAll(request.getSkills()))
                         .toList();
     }
 }

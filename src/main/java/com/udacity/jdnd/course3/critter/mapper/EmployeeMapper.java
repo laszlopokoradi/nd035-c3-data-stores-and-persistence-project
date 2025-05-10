@@ -6,12 +6,13 @@ import com.udacity.jdnd.course3.critter.entity.*;
 import org.mapstruct.*;
 
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING
+, uses = {ActivityResolver.class})
 public interface EmployeeMapper {
     Employee toEntity(EmployeeDTO employeeDTO);
 
-    EmployeeDTO toDto(Employee employee);
+    EmployeeDTO toDTO(Employee employee);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    Employee partialUpdate(EmployeeDTO employeeDTO, @MappingTarget Employee employee);
+    Employee updateFromDTO(EmployeeDTO employeeDTO, @MappingTarget Employee employee);
 }

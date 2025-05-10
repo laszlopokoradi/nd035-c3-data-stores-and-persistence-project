@@ -29,7 +29,6 @@ public class CustomerDTO {
 
     public CustomerDTO setId(UUID id) {
         this.id = id;
-
         return this;
     }
 
@@ -39,7 +38,6 @@ public class CustomerDTO {
 
     public CustomerDTO setName(String name) {
         this.name = name;
-
         return this;
     }
 
@@ -49,7 +47,6 @@ public class CustomerDTO {
 
     public CustomerDTO setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-
         return this;
     }
 
@@ -59,7 +56,6 @@ public class CustomerDTO {
 
     public CustomerDTO setNotes(String notes) {
         this.notes = notes;
-
         return this;
     }
 
@@ -69,7 +65,6 @@ public class CustomerDTO {
 
     public CustomerDTO setPetIds(List<UUID> petIds) {
         this.petIds = petIds;
-
         return this;
     }
 }

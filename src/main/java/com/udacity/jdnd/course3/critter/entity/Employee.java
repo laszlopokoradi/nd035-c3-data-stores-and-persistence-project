@@ -13,8 +13,8 @@ public class Employee extends User {
 
     @ManyToMany
     @JoinTable(
-            name = "schedule_activities",
-            joinColumns = @JoinColumn(name = "schedule_id"),
+            name = "employee_activities",
+            joinColumns = @JoinColumn(name = "employee_id"),
             inverseJoinColumns = @JoinColumn(name = "activity_id")
     )
     private Set<Activity> skills;

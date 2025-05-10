@@ -29,7 +29,7 @@ public class PetController {
     public PetDTO savePet(@RequestBody @Valid PetDTO petDTO) {
         Pet savedPet = this.petService.savePet(this.petMapper.toEntity(petDTO));
 
-        return this.petMapper.toDto(savedPet);
+        return this.petMapper.toDTO(savedPet);
     }
 
     @GetMapping("/{petId}")
@@ -37,7 +37,7 @@ public class PetController {
         Optional<Pet> pet = this.petService.getPetById(petId);
 
         return pet
-                .map(this.petMapper::toDto)
+                .map(this.petMapper::toDTO)
                 .orElseThrow(() -> new EntityNotFoundException("Pet with id %s not found".formatted(petId)));
     }
 
@@ -46,7 +46,7 @@ public class PetController {
         List<Pet> pets = this.petService.getAllPets();
 
         return pets.stream()
-                .map(this.petMapper::toDto)
+                .map(this.petMapper::toDTO)
                 .toList();
     }
 
@@ -55,7 +55,7 @@ public class PetController {
         List<Pet> pets = this.petService.getPetsByOwner(ownerId);
 
         return pets.stream()
-                .map(this.petMapper::toDto)
+                .map(this.petMapper::toDTO)
                 .toList();
     }
 }

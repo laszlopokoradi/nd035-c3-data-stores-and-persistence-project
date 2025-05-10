@@ -1,4 +1,11 @@
-CREATE TABLE IF NOT EXISTS customers
+CREATE TABLE activities
+(
+    id   BIGINT AUTO_INCREMENT NOT NULL,
+    name VARCHAR(255)          NOT NULL,
+    CONSTRAINT pk_activities PRIMARY KEY (id)
+);
+
+CREATE TABLE customers
 (
     id           BINARY(16)   NOT NULL,
     name         VARCHAR(255) NOT NULL,
@@ -7,35 +14,37 @@ CREATE TABLE IF NOT EXISTS customers
     CONSTRAINT pk_customers PRIMARY KEY (id)
 );
 
-CREATE TABLE IF NOT EXISTS employee_days_available
+CREATE TABLE employee_activities
+(
+    activity_id BIGINT     NOT NULL,
+    employee_id BINARY(16) NOT NULL,
+    CONSTRAINT pk_employee_activities PRIMARY KEY (activity_id, employee_id)
+);
+
+CREATE TABLE employee_days_available
 (
     employee_id    BINARY(16) NOT NULL,
     days_available SMALLINT   NULL
 );
 
-CREATE TABLE IF NOT EXISTS employee_skills
-(
-    employee_id BINARY(16)   NOT NULL,
-    skills      VARCHAR(255) NULL
-);
-
-CREATE TABLE IF NOT EXISTS employees
+CREATE TABLE employees
 (
     id   BINARY(16)   NOT NULL,
     name VARCHAR(255) NOT NULL,
     CONSTRAINT pk_employees PRIMARY KEY (id)
 );
 
-ALTER TABLE employee_days_available
-    ADD CONSTRAINT fk_employee_days_available_on_employee FOREIGN KEY (employee_id) REFERENCES employees (id);
+CREATE TABLE schedule_activities
+(
+    activity_id BIGINT     NOT NULL,
+    schedule_id BINARY(16) NOT NULL,
+    CONSTRAINT pk_schedule_activities PRIMARY KEY (activity_id, schedule_id)
+);
 
-ALTER TABLE employee_skills
-    ADD CONSTRAINT fk_employee_skills_on_employee FOREIGN KEY (employee_id) REFERENCES employees (id);
-
-CREATE TABLE IF NOT EXISTS pets
+CREATE TABLE pets
 (
     id          BINARY(16)   NOT NULL,
-    type        VARCHAR(255) NOT NULL,
+    pet_type_id BIGINT       NOT NULL,
     name        VARCHAR(255) NOT NULL,
     customer_id BINARY(16)   NULL,
     birth_date  date         NULL,
@@ -43,36 +52,71 @@ CREATE TABLE IF NOT EXISTS pets
     CONSTRAINT pk_pets PRIMARY KEY (id)
 );
 
-ALTER TABLE  pets
-    ADD CONSTRAINT FK_PETS_ON_CUSTOMER FOREIGN KEY (customer_id) REFERENCES customers (id);
-
-CREATE TABLE IF NOT EXISTS schedule_activities
+CREATE TABLE pet_type_activities
 (
-    schedule_id BIGINT       NOT NULL,
-    activities  VARCHAR(255) NULL
+    activity_id BIGINT NOT NULL,
+    pet_type_id BIGINT NOT NULL,
+    CONSTRAINT pk_pet_type_activities PRIMARY KEY (activity_id, pet_type_id)
 );
 
-CREATE TABLE IF NOT EXISTS schedule_employees
+CREATE TABLE pet_types
+(
+    id   BIGINT AUTO_INCREMENT NOT NULL,
+    name VARCHAR(255)          NOT NULL,
+    CONSTRAINT pk_pet_types PRIMARY KEY (id)
+);
+
+CREATE TABLE schedule_employees
 (
     employee_id BINARY(16) NOT NULL,
     schedule_id BIGINT     NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS schedule_pets
+CREATE TABLE schedule_pets
 (
     pet_id      BINARY(16) NOT NULL,
     schedule_id BIGINT     NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS schedules
+CREATE TABLE schedules
 (
     id   BIGINT AUTO_INCREMENT NOT NULL,
     date date                  NULL,
     CONSTRAINT pk_schedules PRIMARY KEY (id)
 );
 
+ALTER TABLE activities
+    ADD CONSTRAINT uc_activities_name UNIQUE (name);
+
+ALTER TABLE employee_activities
+    ADD CONSTRAINT fk_empact_on_activity FOREIGN KEY (activity_id) REFERENCES activities (id);
+
+ALTER TABLE employee_activities
+    ADD CONSTRAINT fk_empact_on_employee FOREIGN KEY (employee_id) REFERENCES employees (id);
+
+ALTER TABLE employee_days_available
+    ADD CONSTRAINT fk_employee_days_available_on_employee FOREIGN KEY (employee_id) REFERENCES employees (id);
+
 ALTER TABLE schedule_activities
-    ADD CONSTRAINT fk_schedule_activities_on_schedule FOREIGN KEY (schedule_id) REFERENCES schedules (id);
+    ADD CONSTRAINT fk_schact_on_activity FOREIGN KEY (activity_id) REFERENCES activities (id);
+
+ALTER TABLE schedule_activities
+    ADD CONSTRAINT fk_schact_on_employee FOREIGN KEY (schedule_id) REFERENCES employees (id);
+
+ALTER TABLE pets
+    ADD CONSTRAINT FK_PETS_ON_CUSTOMER FOREIGN KEY (customer_id) REFERENCES customers (id);
+
+ALTER TABLE pets
+    ADD CONSTRAINT FK_PETS_ON_PET_TYPE FOREIGN KEY (pet_type_id) REFERENCES pet_types (id);
+
+ALTER TABLE pet_types
+    ADD CONSTRAINT uc_pet_types_name UNIQUE (name);
+
+ALTER TABLE pet_type_activities
+    ADD CONSTRAINT fk_pettypact_on_activity FOREIGN KEY (activity_id) REFERENCES activities (id);
+
+ALTER TABLE pet_type_activities
+    ADD CONSTRAINT fk_pettypact_on_pet_type FOREIGN KEY (pet_type_id) REFERENCES pet_types (id);
 
 ALTER TABLE schedule_employees
     ADD CONSTRAINT fk_schemp_on_employee FOREIGN KEY (employee_id) REFERENCES employees (id);

@@ -1,7 +1,5 @@
 package com.udacity.jdnd.course3.critter.dto;
 
-import com.udacity.jdnd.course3.critter.entity.*;
-
 import java.time.LocalDate;
 import java.util.*;
 
@@ -15,7 +13,7 @@ public class ScheduleDTO {
     private List<UUID> employeeIds;
     private List<UUID> petIds;
     private LocalDate date;
-    private Set<Activity> activities;
+    private Set<Long> activities;
 
     public Long getId(){
         return id;
@@ -53,11 +51,11 @@ public class ScheduleDTO {
         return this;
     }
 
-    public Set<Activity> getActivities() {
+    public Set<Long> getActivities() {
         return activities;
     }
 
-    public ScheduleDTO setActivities(Set<Activity> activities) {
+    public ScheduleDTO setActivities(Set<Long> activities) {
         this.activities = activities;
         return this;
     }

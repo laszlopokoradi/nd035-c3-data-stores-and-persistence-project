@@ -5,8 +5,9 @@ import com.udacity.jdnd.course3.critter.entity.*;
 import org.springframework.data.jpa.repository.*;
 
 import java.util.*;
+import org.springframework.stereotype.*;
 
-
+@Repository
 public interface ScheduleRepository
         extends JpaRepository<Schedule, Long> {
     @Query("SELECT s FROM Schedule s JOIN s.pets p WHERE p.id = :petId")

@@ -16,16 +16,16 @@ public class CustomerResolver {
         this.customerRepository = customerRepository;
     }
 
-    public Customer resolveCustomer(UUID ownerId) {
-        if (ownerId == null) {
+    public Customer resolveCustomerId(UUID customerId) {
+        if (customerId == null) {
             return null;
         }
-        return customerRepository.findById(ownerId)
+        return customerRepository.findById(customerId)
                                  .orElseThrow(() -> new EntityNotFoundException(
-                                         "Customer not found with id: " + ownerId));
+                                         "Customer not found with id: " + customerId));
     }
 
-    public UUID map(Customer customer) {
+    public UUID resolveCustomer(Customer customer) {
         if (customer == null) {
             return null;
         }

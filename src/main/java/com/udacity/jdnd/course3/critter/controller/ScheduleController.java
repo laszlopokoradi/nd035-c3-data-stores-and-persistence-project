@@ -29,7 +29,7 @@ public class ScheduleController {
     public ScheduleDTO createSchedule(@RequestBody @Valid ScheduleDTO scheduleDTO) {
         Schedule createdSchedule = this.scheduleService.createSchedule(scheduleMapper.toEntity(scheduleDTO));
 
-        return scheduleMapper.toDto(createdSchedule);
+        return scheduleMapper.toDTO(createdSchedule);
     }
 
     @GetMapping
@@ -37,7 +37,7 @@ public class ScheduleController {
         List<Schedule> schedules = this.scheduleService.getAllSchedules();
 
         return schedules.stream()
-                        .map(scheduleMapper::toDto)
+                        .map(scheduleMapper::toDTO)
                         .toList();
     }
 
@@ -46,7 +46,7 @@ public class ScheduleController {
         List<Schedule> schedules = this.scheduleService.getSchedulesForPet(petId);
 
         return schedules.stream()
-                        .map(scheduleMapper::toDto)
+                        .map(scheduleMapper::toDTO)
                         .toList();
     }
 
@@ -55,7 +55,7 @@ public class ScheduleController {
         List<Schedule> schedules = this.scheduleService.getSchedulesForEmployee(employeeId);
 
         return schedules.stream()
-                        .map(scheduleMapper::toDto)
+                        .map(scheduleMapper::toDTO)
                         .toList();
     }
 
@@ -64,7 +64,7 @@ public class ScheduleController {
         List<Schedule> schedules = this.scheduleService.getSchedulesForCustomer(customerId);
 
         return schedules.stream()
-                        .map(scheduleMapper::toDto)
+                        .map(scheduleMapper::toDTO)
                         .toList();
     }
 }
